@@ -1,5 +1,5 @@
-import {match} from "assert";
 import * as fs from "fs";
+import {categories} from "./categories";
 
 interface Transaction {
     date: Date;
@@ -7,25 +7,11 @@ interface Transaction {
     amount: number;
 }
 
-const categories = {
-    hobbies: [
-        "NOVELKEYS",
-        "KEBO.STORE",
-        "Cephalopod",
-        "LILLEKRYDDE",
-        "MASSDROP",
-        "THEKEY.COMPANY",
-        "DIXIE MECH",
-        "NICETECHNOL",
-        "RINGERKEYS.COM",
-    ],
-    food: ["FRESHLY", "SOUTH LOOP MARKET", "JEWEL OSCO", "DUNKIN"],
-    housing: ["Quick", "Jin's"],
-    investments: ["VANGUARD"],
-    subscriptions: ["Amazon Prime"],
-    // Fallback if no other category matches.
-    other: [],
-};
+// TODO
+// Convert categories regex description matching and make more generic.
+// Make category matches label data instead of splitting it up.
+// Deduplicate transactions in close time range and same amount.
+
 // Type check.
 const $categories: {[_: string]: string[]} = categories;
 
@@ -45,7 +31,7 @@ const parseTransactionLine = (line: string[]): Transaction | null => {
         description: line[2],
         amount: Number(line[3]) * (isDebit ? -1 : 1),
     };
-    if (transaction.amount === NaN) return null;
+    if (isNaN(transaction.amount)) return null;
     return transaction;
 };
 
@@ -71,6 +57,7 @@ const categorize = (transactions: Transaction[]) => {
                 if (transaction.description.indexOf(pattern) >= 0) {
                     categorized[category].push(transaction);
                     matchingPatterns.push(`${category} "${pattern}"`);
+                    break;
                 }
             }
         }
@@ -80,6 +67,9 @@ const categorize = (transactions: Transaction[]) => {
                     transaction,
                 )} \n  ${matchingPatterns.join(",\n  ")}`,
             );
+        }
+        if (matchingPatterns.length === 0) {
+            categorized.other.push(transaction);
         }
     }
     return categorized;
@@ -95,15 +85,16 @@ const sum = (...transactions: Transaction[]): number => {
 };
 
 const format = (transaction: Transaction): string => {
-    return `${transaction.description.slice(0, 32).padEnd(32)} ${
-        transaction.amount
-    }`;
+    return `${transaction.description
+        .slice(0, 48)
+        .padEnd(48)} ${transaction.amount.toFixed(2).padStart(16)}`;
 };
 
 const print = (str: string) => console.log(str);
 
 console.log(sum(...transactions.food));
-transactions.subscriptions.map(format).forEach(print);
+
+transactions.other.map(format).forEach(print);
 
 const spending = readTransactions(".transactions.csv")
     .filter((t) => t.amount < 0)
