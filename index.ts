@@ -43,6 +43,14 @@ const readTransactions = (fileName: string): Transaction[] => {
         .filter((t) => t !== null);
 };
 
+export const match = (pattern: string, str: string): boolean => {
+    const matchedPattern = pattern.match(/^\/(.+)\/(\w*)$/);
+    if (matchedPattern) {
+        return !!str.match(new RegExp(matchedPattern[1], matchedPattern[2]));
+    }
+    throw `Pattern could not be parsed: ${pattern}`;
+};
+
 const tag = (transactions: Transaction[]): Transaction[] => {
     const tagged: Transaction[] = [];
 
@@ -52,18 +60,16 @@ const tag = (transactions: Transaction[]): Transaction[] => {
         for (const category of Object.keys(categories)) {
             if (category === "other") continue;
             for (const pattern of categories[category]) {
-                if (transaction.description.indexOf(pattern) >= 0) {
+                if (match(pattern, transaction.description)) {
                     tags[category] = true;
                     matchingPatterns.push(`${category} "${pattern}"`);
                 }
             }
         }
         if (matchingPatterns.length > 1) {
-            console.error(
-                `Transaction matches twice: ${JSON.stringify(
-                    transaction,
-                )} \n  ${matchingPatterns.join(",\n  ")}`,
-            );
+            print(transaction);
+            console.log("  " + matchingPatterns.join(",\n  "));
+            console.log("================");
         }
         tagged.push(Object.assign({}, transaction, {tags: Object.keys(tags)}));
     }
@@ -94,7 +100,7 @@ const sum = (transactions: Transaction[]): number => {
 
 const print = (transaction: Transaction) => {
     console.log(
-        transaction.description.slice(0, 32).padEnd(32),
+        transaction.description.padEnd(32),
         transaction.amount.toFixed(2).padStart(9),
         `[${transaction.tags.join(", ")}]`,
     );
