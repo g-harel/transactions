@@ -5,6 +5,7 @@ interface Transaction {
     date: Date;
     description: string;
     amount: number;
+    tags: string[];
 }
 
 // TODO
@@ -30,6 +31,7 @@ const parseTransactionLine = (line: string[]): Transaction | null => {
         date: new Date(Date.parse(line[0])),
         description: line[2],
         amount: Number(line[3]) * (isDebit ? -1 : 1),
+        tags: [],
     };
     if (isNaN(transaction.amount)) return null;
     return transaction;
@@ -41,23 +43,18 @@ const readTransactions = (fileName: string): Transaction[] => {
         .filter((t) => t !== null);
 };
 
-const categorize = (transactions: Transaction[]) => {
-    const categorized: {
-        [_ in keyof typeof categories]: Transaction[];
-    } = {} as any;
-    for (const category of Object.keys(categories)) {
-        categorized[category] = [];
-    }
+const tag = (transactions: Transaction[]): Transaction[] => {
+    const tagged: Transaction[] = [];
 
     for (const transaction of transactions) {
-        let matchingPatterns: string[] = [];
+        const matchingPatterns: string[] = [];
+        const tags: Record<string, boolean> = {};
         for (const category of Object.keys(categories)) {
             if (category === "other") continue;
             for (const pattern of categories[category]) {
                 if (transaction.description.indexOf(pattern) >= 0) {
-                    categorized[category].push(transaction);
+                    tags[category] = true;
                     matchingPatterns.push(`${category} "${pattern}"`);
-                    break;
                 }
             }
         }
@@ -68,33 +65,46 @@ const categorize = (transactions: Transaction[]) => {
                 )} \n  ${matchingPatterns.join(",\n  ")}`,
             );
         }
-        if (matchingPatterns.length === 0) {
-            categorized.other.push(transaction);
-        }
+        tagged.push(Object.assign({}, transaction, {tags: Object.keys(tags)}));
     }
-    return categorized;
+
+    return tagged;
 };
 
-const transactions = categorize(readTransactions(".transactions.csv"));
+const filter = (transactions: Transaction[], tags: string[]): Transaction[] => {
+    return transactions.filter((transaction) => {
+        for (const filterTag of tags) {
+            for (const transactionTag of transaction.tags) {
+                if (filterTag === transactionTag) return true;
+            }
+        }
+    });
+};
 
-const sum = (...transactions: Transaction[]): number => {
+const untagged = (transactions: Transaction[]): Transaction[] => {
+    return transactions.filter((transaction) => transaction.tags.length === 0);
+};
+
+const sum = (transactions: Transaction[]): number => {
     return transactions.reduce(
         (sum, transaction) => sum + transaction.amount,
         0,
     );
 };
 
-const format = (transaction: Transaction): string => {
-    return `${transaction.description
-        .slice(0, 48)
-        .padEnd(48)} ${transaction.amount.toFixed(2).padStart(16)}`;
+const print = (transaction: Transaction) => {
+    console.log(
+        transaction.description.slice(0, 32).padEnd(32),
+        transaction.amount.toFixed(2).padStart(9),
+        `[${transaction.tags.join(", ")}]`,
+    );
 };
 
-const print = (str: string) => console.log(str);
+const transactions = tag(readTransactions(".transactions.csv"));
 
-console.log(sum(...transactions.food));
+console.log(sum(filter(transactions, ["food"])));
 
-transactions.other.map(format).forEach(print);
+untagged(transactions).forEach(print);
 
 const spending = readTransactions(".transactions.csv")
     .filter((t) => t.amount < 0)
