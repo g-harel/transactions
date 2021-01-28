@@ -1,118 +1,19 @@
-import * as fs from "fs";
-import {categories} from "./categories";
-
-interface Transaction {
-    date: Date;
-    description: string;
-    amount: number;
-    tags: string[];
-}
+import {readMintArchive} from "./internal/ingest/mint";
+import {tagTransactions} from "./internal/tags";
+import {filter, print, sum, untagged, Transaction} from "./internal/transaction";
 
 // TODO
-// Convert categories regex description matching and make more generic.
-// Make category matches label data instead of splitting it up.
-// Deduplicate transactions in close time range and same amount.
+// Deduplicate transactions in close time range and same absolute amount.
+// Allow multiple tags per pattern.
+// Merge transactions from multiple sources (by similarity?).
 
-// Type check.
-const $categories: {[_: string]: string[]} = categories;
-
-const readCSV = (fileName: string): string[][] => {
-    const data = fs
-        .readFileSync(fileName, "utf8")
-        .split("\n")
-        .map((line) => line.slice(1, -1).split('","'));
-    return data;
-};
-
-const parseTransactionLine = (line: string[]): Transaction | null => {
-    if (line.length !== 9) return null;
-    const isDebit = line[4].toLowerCase() === "debit";
-    const transaction = {
-        date: new Date(Date.parse(line[0])),
-        description: line[2],
-        amount: Number(line[3]) * (isDebit ? -1 : 1),
-        tags: [],
-    };
-    if (isNaN(transaction.amount)) return null;
-    return transaction;
-};
-
-const readTransactions = (fileName: string): Transaction[] => {
-    return readCSV(fileName)
-        .map(parseTransactionLine)
-        .filter((t) => t !== null);
-};
-
-export const match = (pattern: string, str: string): boolean => {
-    const matchedPattern = pattern.match(/^\/(.+)\/(\w*)$/);
-    if (matchedPattern) {
-        return !!str.match(new RegExp(matchedPattern[1], matchedPattern[2]));
-    }
-    throw `Pattern could not be parsed: ${pattern}`;
-};
-
-const tag = (transactions: Transaction[]): Transaction[] => {
-    const tagged: Transaction[] = [];
-
-    for (const transaction of transactions) {
-        const matchingPatterns: string[] = [];
-        const tags: Record<string, boolean> = {};
-        for (const category of Object.keys(categories)) {
-            if (category === "other") continue;
-            for (const pattern of categories[category]) {
-                if (match(pattern, transaction.description)) {
-                    tags[category] = true;
-                    matchingPatterns.push(`${category} "${pattern}"`);
-                }
-            }
-        }
-        if (matchingPatterns.length > 1) {
-            print(transaction);
-            console.log("  " + matchingPatterns.join(",\n  "));
-            console.log("================");
-        }
-        tagged.push(Object.assign({}, transaction, {tags: Object.keys(tags)}));
-    }
-
-    return tagged;
-};
-
-const filter = (transactions: Transaction[], tags: string[]): Transaction[] => {
-    return transactions.filter((transaction) => {
-        for (const filterTag of tags) {
-            for (const transactionTag of transaction.tags) {
-                if (filterTag === transactionTag) return true;
-            }
-        }
-    });
-};
-
-const untagged = (transactions: Transaction[]): Transaction[] => {
-    return transactions.filter((transaction) => transaction.tags.length === 0);
-};
-
-const sum = (transactions: Transaction[]): number => {
-    return transactions.reduce(
-        (sum, transaction) => sum + transaction.amount,
-        0,
-    );
-};
-
-const print = (transaction: Transaction) => {
-    console.log(
-        transaction.description.padEnd(32),
-        transaction.amount.toFixed(2).padStart(9),
-        `[${transaction.tags.join(", ")}]`,
-    );
-};
-
-const transactions = tag(readTransactions(".transactions.csv"));
+const transactions = tagTransactions("tags.txt", readMintArchive(".transactions.csv"));
 
 console.log(sum(filter(transactions, ["food"])));
 
 untagged(transactions).forEach(print);
 
-const spending = readTransactions(".transactions.csv")
+const spending = readMintArchive(".transactions.csv")
     .filter((t) => t.amount < 0)
     // Vanguard transfers are investments.
     .filter((t) => !t.description.startsWith('"VANGUARD'))
