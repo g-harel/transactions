@@ -1,104 +1,104 @@
-keyboards :: novelkeys
-keyboards :: kebo\.store
-keyboards :: cephalopodc?
-keyboards :: lillekrydde
-keyboards :: thekey\.company
-keyboards :: dixie mech
-keyboards :: nicetechnol
-keyboards :: ringerkeys\.com
-keyboards :: keyboards?
-keyboards :: aliexpress
-keyboards :: archetype
-keyboards :: rama ?works
-keyboards :: malvix
-keyboards :: spacecables
-keyboards :: nice technologies
-keyboards :: zeal generation
-keyboards :: valvik
-keyboards :: zhantu huang
-keyboards :: zap cables
-keyboards :: (mass)?drop(\.com)?
-keyboards :: teal technik
-keyboards :: originative
-keyboards :: smpl supply
-keyboards :: cftkb
-keyboards :: unicomp, inc.
-keyboards :: projectkb
-keyboards :: glorious pc
-keyboards :: pikatea
-keyboards :: \*3334186279
-keyboards :: stupidfish
+spending shopping keyboards :: novelkeys
+spending shopping keyboards :: kebo\.store
+spending shopping keyboards :: cephalopodc?
+spending shopping keyboards :: lillekrydde
+spending shopping keyboards :: thekey\.company
+spending shopping keyboards :: dixie mech
+spending shopping keyboards :: nicetechnol
+spending shopping keyboards :: ringerkeys\.com
+spending shopping keyboards :: keyboards?
+spending shopping keyboards :: aliexpress
+spending shopping keyboards :: archetype
+spending shopping keyboards :: rama ?works
+spending shopping keyboards :: malvix
+spending shopping keyboards :: spacecables
+spending shopping keyboards :: nice technologies
+spending shopping keyboards :: zeal generation
+spending shopping keyboards :: valvik
+spending shopping keyboards :: zhantu huang
+spending shopping keyboards :: zap cables
+spending shopping keyboards :: (mass)?drop(\.com)?
+spending shopping keyboards :: teal technik
+spending shopping keyboards :: originative
+spending shopping keyboards :: smpl supply
+spending shopping keyboards :: cftkb
+spending shopping keyboards :: unicomp, inc.
+spending shopping keyboards :: projectkb
+spending shopping keyboards :: glorious pc
+spending shopping keyboards :: pikatea
+spending shopping keyboards :: \*3334186279
+spending shopping keyboards :: stupidfish
 
-shopping :: amzn mktp
-shopping :: amazon\.com\*
-shopping :: bestbuy
-shopping :: formd
-shopping :: target
-shopping :: indiegogo
-shopping :: dbrand
-shopping :: facebook
-shopping :: pocket-tripod-pro
-shopping :: topo designs
-shopping :: micro ?center
-shopping :: vans inc
-shopping :: dba.*chip.*off
-shopping :: ikea.com
-shopping :: ebay
+spending shopping :: amzn mktp
+spending shopping :: amazon\.com\*
+spending shopping :: bestbuy
+spending shopping :: formd
+spending shopping :: target
+spending shopping :: indiegogo
+spending shopping :: dbrand
+spending shopping :: facebook
+spending shopping :: pocket-tripod-pro
+spending shopping :: topo designs
+spending shopping :: micro ?center
+spending shopping :: vans inc
+spending shopping :: dba.*chip.*off
+spending shopping :: ikea.com
+spending shopping :: ebay
 
-games :: riot
-games :: origin.com
-games :: steam(games\.com| purchase)
-games :: bumble
-games :: mojang
-games :: kinguin
-games :: sirvo llc
-games :: red apps
-games :: nadav fima
+spending games :: riot
+spending games :: origin.com
+spending games :: steam(games\.com| purchase)
+spending games :: bumble
+spending games :: mojang
+spending games :: kinguin
+spending games :: sirvo llc
+spending games :: red apps
+spending games :: nadav fima
 
-food :: south loop market
-food :: jewel osco
-food :: dunkin
-food :: h mart
-food :: walgreens
-food :: giordano'?s
-food :: shake shack
-food :: mcdonald's
-food :: federales
-food :: popeyes
-food :: amazon tips
-food :: freshly
-food :: uber eats
-food :: luke's
-food :: althea
-food :: city tap
-food :: vivi bubble tea
-food :: craft pizza
-food :: pepsi(ven)?
-food :: cescas
-food :: do-rite
-food :: california food mart
-food :: welcome back lounge
-food :: cvs\/pharmacy
-food :: noodles etc
-food :: tikka n  curry
-food :: domino's
-food :: harold's
-food :: mothers chicago
-food :: fulton market local
-food :: venmo
-food :: teamo boba
-food :: sangamon chicago
-food :: chipotle
-food :: la fournette
-food :: vanille
-food :: 7-eleven
-food :: the monkey's paw
-food :: 1lncln prk
-food :: burger king
-food :: zelle.*to j
+spending food :: south loop market
+spending food :: jewel osco
+spending food :: dunkin
+spending food :: h mart
+spending food :: walgreens
+spending food :: giordano'?s
+spending food :: shake shack
+spending food :: mcdonald's
+spending food :: federales
+spending food :: popeyes
+spending food :: amazon tips
+spending food :: freshly
+spending food :: uber eats
+spending food :: luke's
+spending food :: althea
+spending food :: city tap
+spending food :: vivi bubble tea
+spending food :: craft pizza
+spending food :: pepsi(ven)?
+spending food :: cescas
+spending food :: do-rite
+spending food :: california food mart
+spending food :: welcome back lounge
+spending food :: cvs\/pharmacy
+spending food :: noodles etc
+spending food :: tikka n  curry
+spending food :: domino's
+spending food :: harold's
+spending food :: mothers chicago
+spending food :: fulton market local
+spending food :: venmo
+spending food :: teamo boba
+spending food :: sangamon chicago
+spending food :: chipotle
+spending food :: la fournette
+spending food :: vanille
+spending food :: 7-eleven
+spending food :: the monkey's paw
+spending food :: 1lncln prk
+spending food :: burger king
+spending food :: zelle.*to j
 
-housing :: jin's electric
-housing :: zelle.*to w
+spending housing :: jin's electric
+spending housing :: zelle.*to w
 
 finances :: vanguard
 finances :: autosave
@@ -107,57 +107,57 @@ finances :: employer contribution
 finances :: interest
 finances :: investment: v
 
-fees :: foreign exchange rate adjustment
-fees :: healthequity inc
-fees :: domestic incoming wire fee
-fees :: foreign transaction fee
+spending fees :: foreign exchange rate adjustment
+spending fees :: healthequity inc
+spending fees :: domestic incoming wire fee
+spending fees :: foreign transaction fee
 
-income :: google llc
-income :: deposit
-income :: nacho
-income :: ^tps$
-income :: impot solidarite
-income :: tax ref
-income :: fedwire credit
-income :: morgan stanley.*(credit|payment)
-income :: zelle.*from/
+income work :: google llc
+income work :: deposit
+income work :: fedwire credit
+income work :: morgan stanley.*(credit|payment)
+income taxes :: ^tps$
+income taxes :: impot solidarite
+income taxes :: tax ref
+income sales :: nacho
+income sales :: zelle.*from/
 
-subscriptions :: amazon prime
-subscriptions :: patreon
-subscriptions :: netflix\.com
-subscriptions :: github
-subscriptions :: disney plus
-subscriptions :: agilebits|1password
-subscriptions :: n(ew )?y(ork)? times
-subscriptions :: average tech revi(ews)?
-subscriptions :: google storage?
+spending subscriptions :: amazon prime
+spending subscriptions :: patreon
+spending subscriptions :: netflix\.com
+spending subscriptions :: github
+spending subscriptions :: disney plus
+spending subscriptions :: agilebits|1password
+spending subscriptions :: n(ew )?y(ork)? times
+spending subscriptions :: average tech revi(ews)?
+spending subscriptions :: google storage?
 
-utilities :: com(m )?ed
-utilities :: ventra
-utilities :: usps change of address?
-utilities :: google fi
-utilities :: state farm
-utilities :: hair cuttery
-utilities :: supercuts
-utilities :: bell mobility
-utilities :: midwest express clinic
-utilities :: quest diagnostics
+spending utilities :: com(m )?ed
+spending utilities :: ventra
+spending utilities :: usps change of address?
+spending utilities :: google fi
+spending utilities :: state farm
+spending utilities :: hair cuttery
+spending utilities :: supercuts
+spending utilities :: bell mobility
+spending utilities :: midwest express clinic
+spending utilities :: quest diagnostics
 
-leisure :: alpine valley
-leisure :: uber(\s{2,}|\s+trip|\.com)
-leisure :: atm withdrawal
-leisure :: chicago architect
-leisure :: chestnut mountain
-leisure :: chicago park distr
-leisure :: zelle.*to p
+spending leisure :: alpine valley
+spending leisure :: uber(\s{2,}|\s+trip|\.com)
+spending leisure :: atm withdrawal
+spending leisure :: chicago architect
+spending leisure :: chestnut mountain
+spending leisure :: chicago park distr
+spending leisure :: zelle.*to p
 
-travel :: air canada
+spending travel :: air canada
 
-projects :: google\*cloud
-projects :: amazon web services
-projects :: google \*services
-projects :: google \*domains
-projects :: google\*domains
+spending projects :: google\*cloud
+spending projects :: amazon web services
+spending projects :: google \*services
+spending projects :: google \*domains
+spending projects :: google\*domains
 
 ignore :: balance forward
 ignore :: virement

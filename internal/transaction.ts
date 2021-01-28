@@ -5,7 +5,10 @@ export interface Transaction {
     tags: string[];
 }
 
-export const filter = (transactions: Transaction[], tags: string[]): Transaction[] => {
+export const filter = (
+    transactions: Transaction[],
+    tags: string[],
+): Transaction[] => {
     return transactions.filter((transaction) => {
         for (const filterTag of tags) {
             for (const transactionTag of transaction.tags) {
@@ -26,10 +29,10 @@ export const sum = (transactions: Transaction[]): number => {
     );
 };
 
-export const print = (transaction: Transaction) => {
-    console.log(
+export const print = (transaction: Transaction): string => {
+    return [
         transaction.description.padEnd(32),
         transaction.amount.toFixed(2).padStart(9),
         `[${transaction.tags.join(", ")}]`,
-    );
+    ].join(" ");
 };

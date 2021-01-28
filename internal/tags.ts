@@ -2,39 +2,50 @@ import {readLines} from "./ingest/files";
 import {print, Transaction} from "./transaction";
 
 interface Matcher {
-    tag: string;
+    tags: string[];
     pattern: RegExp;
     raw: string;
 }
 
 const parseMatcherLine = (line: string): Matcher => {
+    // TODO detect broken lines (parts.length > 2).
     const parts = line.split(" :: ");
-    return {tag: parts[0], pattern: new RegExp(parts[1], "i"), raw: line};
+    return {
+        tags: parts[0].split(" "),
+        pattern: new RegExp(parts[1], "i"),
+        raw: line,
+    };
 };
 
 const match = (matcher: Matcher, str: string): boolean => {
     return !!str.match(matcher.pattern);
 };
 
-export const tagTransactions = (fileName: string, transactions: Transaction[]): Transaction[] => {
+export const tagTransactions = (
+    fileName: string,
+    transactions: Transaction[],
+): Transaction[] => {
     const tagged: Transaction[] = [];
-
     const matchers = readLines(fileName).filter(Boolean).map(parseMatcherLine);
 
     for (const transaction of transactions) {
-        const matches: Matcher[] = [];
-        const tags: Record<string, boolean> = {};
+        let matched: Matcher = null;
+        let tags: string[] = [];
         for (const matcher of matchers) {
             if (match(matcher, transaction.description)) {
-                tags[matcher.tag] = true;
-                matches.push(matcher);
+                if (matched !== null) {
+                    console.log("ERROR Multiple:", print(transaction));
+                    console.log("  " + matched.raw);
+                    console.log("  " + matcher.raw);
+                }
+                tags = matcher.tags;
+                matched = matcher;
             }
         }
-        if (matches.length > 1) {
-            print(transaction);
-            console.log("  " + matches.map((m) => m.raw).join(",\n  "));
+        if (tags.length === 0) {
+            console.log("ERROR Unmatched:", print(transaction));
         }
-        tagged.push(Object.assign({}, transaction, {tags: Object.keys(tags)}));
+        tagged.push(Object.assign({}, transaction, {tags}));
     }
 
     return tagged;
