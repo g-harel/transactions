@@ -1,6 +1,6 @@
 import {readMintArchive} from "./internal/ingest/mint";
 import {tagTransactions} from "./internal/tags";
-import {filter, sum} from "./internal/transaction";
+import {filter, print, sum} from "./internal/transaction";
 
 // TODO
 // Deduplicate transactions in close time range and same absolute amount.
@@ -12,12 +12,7 @@ const transactions = tagTransactions(
     readMintArchive(".transactions.csv"),
 );
 
-const sumTag = (tag: string) => {
-    console.log(tag, sum(filter(transactions, [tag])).toLocaleString());
-};
-
-sumTag("income");
-sumTag("spending");
-sumTag("food");
-sumTag("finances");
-console.log("total", sum(transactions).toLocaleString());
+const tag = "taxes";
+filter(transactions, [tag]).map((t) => console.log(print(t)));
+console.log("====");
+console.log(tag, sum(filter(transactions, [tag])).toLocaleString());

@@ -17,8 +17,10 @@ const parseMatcherLine = (line: string): Matcher => {
     };
 };
 
-const match = (matcher: Matcher, str: string): boolean => {
-    return !!str.match(matcher.pattern);
+const match = (matcher: Matcher, transaction: Transaction): boolean => {
+    for (const description of transaction.descriptions) {
+        if (!!description.match(matcher.pattern)) return true;
+    }
 };
 
 export const tagTransactions = (
@@ -32,7 +34,7 @@ export const tagTransactions = (
         let matched: Matcher = null;
         let tags: string[] = [];
         for (const matcher of matchers) {
-            if (match(matcher, transaction.description)) {
+            if (match(matcher, transaction)) {
                 if (matched !== null) {
                     console.log("ERROR Multiple:", print(transaction));
                     console.log("  " + matched.raw);

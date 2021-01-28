@@ -6,7 +6,7 @@ const parseTransactionLine = (line: string[]): Transaction | null => {
     const isDebit = line[4].toLowerCase() === "debit";
     const transaction = {
         date: new Date(Date.parse(line[0])),
-        description: line[2],
+        descriptions: [line[1], line[2]],
         amount: Number(line[3]) * (isDebit ? -1 : 1),
         tags: [],
     };

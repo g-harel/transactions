@@ -28,6 +28,8 @@ spending shopping keyboards :: glorious pc
 spending shopping keyboards :: pikatea
 spending shopping keyboards :: \*3334186279
 spending shopping keyboards :: stupidfish
+spending shopping keyboards :: tonglingheh
+spending shopping keyboards :: ^computers$
 
 spending shopping :: amzn mktp
 spending shopping :: amazon\.com\*
@@ -67,7 +69,7 @@ spending food :: federales
 spending food :: popeyes
 spending food :: amazon tips
 spending food :: freshly
-spending food :: uber eats
+spending food :: uber.*eats
 spending food :: luke's
 spending food :: althea
 spending food :: city tap
@@ -106,21 +108,13 @@ finances :: dividend
 finances :: employer contribution
 finances :: interest
 finances :: investment: v
+finances :: balance forward
 
 spending fees :: foreign exchange rate adjustment
 spending fees :: healthequity inc
 spending fees :: domestic incoming wire fee
 spending fees :: foreign transaction fee
-
-income work :: google llc
-income work :: deposit
-income work :: fedwire credit
-income work :: morgan stanley.*(credit|payment)
-income taxes :: ^tps$
-income taxes :: impot solidarite
-income taxes :: tax ref
-income sales :: nacho
-income sales :: zelle.*from/
+spending fees :: maintenance fee
 
 spending subscriptions :: amazon prime
 spending subscriptions :: patreon
@@ -142,23 +136,41 @@ spending utilities :: supercuts
 spending utilities :: bell mobility
 spending utilities :: midwest express clinic
 spending utilities :: quest diagnostics
+spending utilities :: the ups store
+spending utilities :: usps po
 
 spending leisure :: alpine valley
-spending leisure :: uber(\s{2,}|\s+trip|\.com)
+spending leisure :: uber.*trip
 spending leisure :: atm withdrawal
 spending leisure :: chicago architect
 spending leisure :: chestnut mountain
 spending leisure :: chicago park distr
 spending leisure :: zelle.*to p
 
+spending mystery :: fedex office?
+
+
+
+
+income taxes :: ^tps$
+income taxes :: impot solidarite
+income taxes :: tax ref
+income taxes :: ach interac w3
+
+spending projects :: amazon web services
+spending projects :: google.*(domains|services|cloud)
+
 spending travel :: air canada
 
-spending projects :: google\*cloud
-spending projects :: amazon web services
-spending projects :: google \*services
-spending projects :: google \*domains
-spending projects :: google\*domains
+income sales :: nacho
+income sales :: zelle.*from
+income sales :: dp chq mob
 
-ignore :: balance forward
-ignore :: virement
-ignore :: payment (received|.*thank you|to.*card)
+creditcards :: virement w3
+creditcards :: payment (received|.*thank you|to.*card)
+creditcards :: webclient funds transfer
+
+income work :: google llc
+income work :: deposit
+income work :: fedwire credit
+income work :: morgan stanley.*(credit|payment)
