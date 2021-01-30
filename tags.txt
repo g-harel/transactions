@@ -1,176 +1,177 @@
-spending shopping keyboards :: novelkeys
-spending shopping keyboards :: kebo\.store
-spending shopping keyboards :: cephalopodc?
-spending shopping keyboards :: lillekrydde
-spending shopping keyboards :: thekey\.company
-spending shopping keyboards :: dixie mech
-spending shopping keyboards :: nicetechnol
-spending shopping keyboards :: ringerkeys\.com
-spending shopping keyboards :: keyboards?
-spending shopping keyboards :: aliexpress
-spending shopping keyboards :: archetype
-spending shopping keyboards :: rama ?works
-spending shopping keyboards :: malvix
-spending shopping keyboards :: spacecables
-spending shopping keyboards :: nice technologies
-spending shopping keyboards :: zeal generation
-spending shopping keyboards :: valvik
-spending shopping keyboards :: zhantu huang
-spending shopping keyboards :: zap cables
-spending shopping keyboards :: (mass)?drop(\.com)?
-spending shopping keyboards :: teal technik
-spending shopping keyboards :: originative
-spending shopping keyboards :: smpl supply
-spending shopping keyboards :: cftkb
-spending shopping keyboards :: unicomp, inc.
-spending shopping keyboards :: projectkb
-spending shopping keyboards :: glorious pc
-spending shopping keyboards :: pikatea
-spending shopping keyboards :: \*3334186279
-spending shopping keyboards :: stupidfish
-spending shopping keyboards :: tonglingheh
-spending shopping keyboards :: ^computers$
+ignore :: balance forward
 
-spending shopping :: amzn mktp
-spending shopping :: amazon\.com\*
-spending shopping :: bestbuy
-spending shopping :: formd
-spending shopping :: target
-spending shopping :: indiegogo
-spending shopping :: dbrand
-spending shopping :: facebook
-spending shopping :: pocket-tripod-pro
-spending shopping :: topo designs
-spending shopping :: micro ?center
-spending shopping :: vans inc
-spending shopping :: dba.*chip.*off
-spending shopping :: ikea.com
-spending shopping :: ebay
+income interest :: dividend
+income interest :: interest
 
-spending games :: riot
-spending games :: origin.com
-spending games :: steam(games\.com| purchase)
-spending games :: bumble
-spending games :: mojang
-spending games :: kinguin
-spending games :: sirvo llc
-spending games :: red apps
-spending games :: nadav fima
+income sale :: dp chq mob
+income sale :: nacho
+income sale :: zelle.*from
 
-spending food :: south loop market
-spending food :: jewel osco
-spending food :: dunkin
-spending food :: h mart
-spending food :: walgreens
-spending food :: giordano'?s
-spending food :: shake shack
-spending food :: mcdonald's
-spending food :: federales
-spending food :: popeyes
-spending food :: amazon tips
-spending food :: freshly
-spending food :: uber.*eats
-spending food :: luke's
-spending food :: althea
-spending food :: city tap
-spending food :: vivi bubble tea
-spending food :: craft pizza
-spending food :: pepsi(ven)?
-spending food :: cescas
-spending food :: do-rite
-spending food :: california food mart
-spending food :: welcome back lounge
-spending food :: cvs\/pharmacy
-spending food :: noodles etc
-spending food :: tikka n  curry
-spending food :: domino's
-spending food :: harold's
-spending food :: mothers chicago
-spending food :: fulton market local
-spending food :: venmo
-spending food :: teamo boba
-spending food :: sangamon chicago
-spending food :: chipotle
-spending food :: la fournette
-spending food :: vanille
-spending food :: 7-eleven
-spending food :: the monkey's paw
+income tax :: ^tps$
+income tax :: impot solidarite
+income tax :: tax ref
+
+income work :: deposit
+income work :: employer contribution
+income work :: fedwire credit
+income work :: google llc
+income work :: morgan stanley.*(credit|payment)
+
+investment :: investment: [A-Z]+
+investment :: vanguard.*buy
+
+spending fee :: domestic incoming wire fee
+spending fee :: foreign exchange rate adjustment
+spending fee :: foreign transaction fee
+spending fee :: healthequity inc
+spending fee :: maintenance fee
+
 spending food :: 1lncln prk
+spending food :: 7-eleven
+spending food :: althea
+spending food :: amazon tips
 spending food :: burger king
-spending food :: zelle.*to j
+spending food :: california food mart
+spending food :: cescas
+spending food :: chipotle
+spending food :: city tap
+spending food :: craft pizza
+spending food :: cvs\/pharmacy
+spending food :: do-rite
+spending food :: domino's
+spending food :: dunkin
+spending food :: federales
+spending food :: freshly
+spending food :: fulton market local
+spending food :: giordano'?s
+spending food :: h mart
+spending food :: harold's
+spending food :: jewel osco
+spending food :: la fournette
+spending food :: luke's
+spending food :: mcdonald's
+spending food :: mothers chicago
+spending food :: noodles etc
+spending food :: pepsi(ven)?
+spending food :: popeyes
+spending food :: sangamon chicago
+spending food :: shake shack
+spending food :: south loop market
+spending food :: teamo boba
+spending food :: the monkey's paw
+spending food :: tikka n  curry
+spending food :: uber.*eats
+spending food :: vanille
+spending food :: venmo
+spending food :: vivi bubble tea
+spending food :: walgreens
+spending food :: welcome back lounge
+spending food :: zelle.*to j ?ames
 
-spending housing :: jin's electric
+spending games :: bumble
+spending games :: kinguin
+spending games :: mojang
+spending games :: nadav fima
+spending games :: origin.com
+spending games :: red apps
+spending games :: riot
+spending games :: sirvo llc
+spending games :: steam(games\.com| purchase)
+
+spending housing :: j?in's electric
 spending housing :: zelle.*to w
 
-finances :: vanguard
-finances :: autosave
-finances :: dividend
-finances :: employer contribution
-finances :: interest
-finances :: investment: v
-finances :: balance forward
-
-spending fees :: foreign exchange rate adjustment
-spending fees :: healthequity inc
-spending fees :: domestic incoming wire fee
-spending fees :: foreign transaction fee
-spending fees :: maintenance fee
-
-spending subscriptions :: amazon prime
-spending subscriptions :: patreon
-spending subscriptions :: netflix\.com
-spending subscriptions :: github
-spending subscriptions :: disney plus
-spending subscriptions :: agilebits|1password
-spending subscriptions :: n(ew )?y(ork)? times
-spending subscriptions :: average tech revi(ews)?
-spending subscriptions :: google storage?
-
-spending utilities :: com(m )?ed
-spending utilities :: ventra
-spending utilities :: usps change of address?
-spending utilities :: google fi
-spending utilities :: state farm
-spending utilities :: hair cuttery
-spending utilities :: supercuts
-spending utilities :: bell mobility
-spending utilities :: midwest express clinic
-spending utilities :: quest diagnostics
-spending utilities :: the ups store
-spending utilities :: usps po
-
 spending leisure :: alpine valley
-spending leisure :: uber.*trip
 spending leisure :: atm withdrawal
-spending leisure :: chicago architect
 spending leisure :: chestnut mountain
+spending leisure :: chicago architect
 spending leisure :: chicago park distr
+spending leisure :: uber.*trip
 spending leisure :: zelle.*to p
 
 spending mystery :: fedex office?
 
+spending project :: amazon web services
+spending project :: google.*(domains|services|cloud)
 
+spending shopping :: amazon\.com\*
+spending shopping :: amzn mktp
+spending shopping :: bestbuy
+spending shopping :: dba.*chip.*off
+spending shopping :: dbrand
+spending shopping :: ebay
+spending shopping :: facebook
+spending shopping :: formd
+spending shopping :: ikea.com
+spending shopping :: indiegogo
+spending shopping :: micro ?center
+spending shopping :: pocket-tripod-pro
+spending shopping :: target
+spending shopping :: topo designs
+spending shopping :: vans inc
 
+spending shopping keyboard :: (mass)?drop(\.com)?
+spending shopping keyboard :: \*3334186279
+spending shopping keyboard :: ^computers$
+spending shopping keyboard :: aliexpress
+spending shopping keyboard :: archetype
+spending shopping keyboard :: cephalopodc?
+spending shopping keyboard :: cftkb
+spending shopping keyboard :: dixie mech
+spending shopping keyboard :: glorious pc
+spending shopping keyboard :: kebo\.store
+spending shopping keyboard :: keyboard?
+spending shopping keyboard :: lillekrydde
+spending shopping keyboard :: malvix
+spending shopping keyboard :: nice technologies
+spending shopping keyboard :: nicetechnol
+spending shopping keyboard :: novelkeys
+spending shopping keyboard :: originative
+spending shopping keyboard :: pikatea
+spending shopping keyboard :: projectkb
+spending shopping keyboard :: rama ?works
+spending shopping keyboard :: ringerkeys\.com
+spending shopping keyboard :: smpl supply
+spending shopping keyboard :: spacecables
+spending shopping keyboard :: stupidfish
+spending shopping keyboard :: teal technik
+spending shopping keyboard :: thekey\.company
+spending shopping keyboard :: tonglingheh
+spending shopping keyboard :: unicomp, inc.
+spending shopping keyboard :: valvik
+spending shopping keyboard :: zap cables
+spending shopping keyboard :: zeal generation
+spending shopping keyboard :: zhantu huang
 
-income taxes :: ^tps$
-income taxes :: impot solidarite
-income taxes :: tax ref
-income taxes :: ach interac w3
-
-spending projects :: amazon web services
-spending projects :: google.*(domains|services|cloud)
+spending subscription :: agilebits|1password
+spending subscription :: amazon prime
+spending subscription :: average tech revi(ews)?
+spending subscription :: disney plus
+spending subscription :: github
+spending subscription :: google storage?
+spending subscription :: n(ew )?y(ork)? times
+spending subscription :: netflix\.com
+spending subscription :: patreon
 
 spending travel :: air canada
 
-income sales :: nacho
-income sales :: zelle.*from
-income sales :: dp chq mob
+spending utility :: bell mobility
+spending utility :: com(m )?ed
+spending utility :: google fi
+spending utility :: hair cuttery
+spending utility :: midwest express clinic
+spending utility :: quest diagnostics
+spending utility :: state farm
+spending utility :: supercuts
+spending utility :: the ups store
+spending utility :: usps change of address?
+spending utility :: usps po
+spending utility :: ventra
 
-creditcards :: virement w3
-creditcards :: payment (received|.*thank you|to.*card)
-creditcards :: webclient funds transfer
+tax :: ach interac w3
 
-income work :: google llc
-income work :: deposit
-income work :: fedwire credit
-income work :: morgan stanley.*(credit|payment)
+transfer :: autosave
+transfer :: payment (received|.*thank you|to.*card)
+transfer :: vanguard.*edi pa?yme?nts
+transfer :: virement w3
+transfer :: webclient funds transfer
