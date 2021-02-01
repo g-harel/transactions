@@ -1,4 +1,4 @@
-import {Transaction} from "../transaction";
+import {Transaction} from "../transaction/transaction";
 import {readCSV} from "./files";
 
 const parseTransactionLine = (line: string[]): Transaction | null => {

@@ -1,4 +1,4 @@
-import {readLines} from "./ingest/files";
+import {readLines} from "../ingest/files";
 import {print, Transaction} from "./transaction";
 
 interface Matcher {

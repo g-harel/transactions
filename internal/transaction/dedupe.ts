@@ -1,10 +1,4 @@
-export interface Transaction {
-    id: string;
-    date: Date;
-    descriptions: string[];
-    amount: number;
-    tags: string[];
-}
+import {print, Transaction} from "./transaction";
 
 const isPayPal = (transaction: Transaction): boolean => {
     for (const description of transaction.descriptions) {
@@ -38,7 +32,7 @@ export const dedupe = (transactions: Transaction[]): Transaction[] => {
                 const current = similarTransactions[i];
                 const compare = similarTransactions[j];
                 if (isPayPal(current) || isPayPal(compare)) {
-                    if (daysDifference(current, compare) < 4) {
+                    if (daysDifference(current, compare) < 7) {
                         isDuplicate = true;
                         console.log(print(current));
                         console.log(print(compare));
@@ -51,46 +45,4 @@ export const dedupe = (transactions: Transaction[]): Transaction[] => {
     }
 
     return result;
-};
-
-export const filter = (
-    transactions: Transaction[],
-    tags: string[],
-): Transaction[] => {
-    return transactions.filter((transaction) => {
-        for (const filterTag of tags) {
-            for (const transactionTag of transaction.tags) {
-                if (filterTag === transactionTag) return true;
-            }
-        }
-    });
-};
-
-export const untagged = (transactions: Transaction[]): Transaction[] => {
-    return transactions.filter((transaction) => transaction.tags.length === 0);
-};
-
-export const sum = (transactions: Transaction[]): number => {
-    return transactions.reduce(
-        (sum, transaction) => sum + transaction.amount,
-        0,
-    );
-};
-
-export const sort = (transactions: Transaction[]): Transaction[] => {
-    return transactions.sort((a, b) => a.date.getTime() - b.date.getTime());
-};
-
-export const print = (transaction: Transaction): string => {
-    const descriptions: Record<string, boolean> = {};
-    for (const description of transaction.descriptions) {
-        descriptions[description] = true;
-    }
-    return [
-        transaction.id,
-        Object.keys(descriptions).join("|").slice(0, 42).padEnd(42),
-        transaction.amount.toFixed(2).padStart(9),
-        transaction.date.toISOString().slice(0, 10),
-        `[${transaction.tags.join(", ")}]`,
-    ].join(" ");
 };
