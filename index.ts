@@ -8,6 +8,7 @@ import {print} from "./internal/transaction/transaction";
 // Deduplicate transactions in close time range and same absolute amount. (paypal)
 // Merge transactions from multiple sources (by similarity?).
 // Filter with OR/NOT/AND logic.
+// Toggleable verbose logs for ignored stuff and errors.
 
 const transactions = tagTransactions(
     "tags.txt",

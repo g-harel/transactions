@@ -14,6 +14,29 @@ const daysDifference = (a: Transaction, b: Transaction): number => {
     return Math.abs(a.date.getTime() - b.date.getTime()) / dayMs;
 };
 
+const descriptionTokens = (transaction: Transaction): string[] => {
+    return transaction.descriptions
+        .map((s) => s.split(/\W/))
+        .reduce((acc, val) => acc.concat(val), [])
+        .filter(Boolean)
+        .map((token) => token.toLowerCase());
+};
+
+const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
+    const aTokens = descriptionTokens(a);
+    const bTokens = descriptionTokens(b);
+    console.log(aTokens);
+    let count = 0;
+    for (const aToken of aTokens) {
+        for (const bToken of bTokens) {
+            if (aToken === bToken) {
+                count++;
+            }
+        }
+    }
+    return count / (aTokens.length + bTokens.length);
+};
+
 export const dedupe = (transactions: Transaction[]): Transaction[] => {
     const amountMap: {[amount: number]: Transaction[]} = {};
 
@@ -36,7 +59,11 @@ export const dedupe = (transactions: Transaction[]): Transaction[] => {
                         isDuplicate = true;
                         console.log(print(current));
                         console.log(print(compare));
-                        console.log("====");
+                        console.log(
+                            "====",
+                            descriptionSimilarity(current, compare),
+                        );
+                        break;
                     }
                 }
             }
