@@ -22,16 +22,36 @@ const descriptionTokens = (transaction: Transaction): string[] => {
         .map((token) => token.toLowerCase());
 };
 
+// Edit distance where inserts and removals are cheaper than replacements.
+// TODO does this favor edits at the end of the string.
+const proximity = (a: string, b: string, m: number, n: number): number => {
+    if (m === 0) return n / 2;
+    if (n === 0) return m / 2;
+
+    if (a[m - 1] === b[n - 1]) {
+        return proximity(a, b, m - 1, n - 1);
+    }
+
+    return Math.min(
+        0.5 + proximity(a, b, m, n - 1), // Insert
+        0.5 + proximity(a, b, m - 1, n), // Remove
+        1 + proximity(a, b, m - 1, n - 1), // Replace
+    );
+};
+
+const stringSimilarity = (a: string, b: string): number => {
+    return 1 / (1 + proximity(a, b, a.length, b.length));
+};
+
 const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
     const aTokens = descriptionTokens(a);
     const bTokens = descriptionTokens(b);
-    console.log(aTokens);
     let count = 0;
     for (const aToken of aTokens) {
         for (const bToken of bTokens) {
-            if (aToken === bToken) {
-                count++;
-            }
+            const p = stringSimilarity(aToken, bToken);
+            // console.log(aToken, bToken, p);
+            count += p;
         }
     }
     return count / (aTokens.length + bTokens.length);
