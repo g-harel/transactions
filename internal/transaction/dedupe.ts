@@ -23,10 +23,9 @@ const descriptionTokens = (transaction: Transaction): string[] => {
 };
 
 // Edit distance where inserts and removals are cheaper than replacements.
-// TODO does this favor edits at the end of the string.
 const proximity = (a: string, b: string, m: number, n: number): number => {
-    if (m === 0) return n / 2;
-    if (n === 0) return m / 2;
+    if (m === 0) return n * 0.5;
+    if (n === 0) return m * 0.5;
 
     if (a[m - 1] === b[n - 1]) {
         return proximity(a, b, m - 1, n - 1);
@@ -40,22 +39,39 @@ const proximity = (a: string, b: string, m: number, n: number): number => {
 };
 
 const stringSimilarity = (a: string, b: string): number => {
-    return 1 / (1 + proximity(a, b, a.length, b.length));
+    const maxScore = Math.max(a.length, b.length);
+    const adjusted = 1 - proximity(a, b, a.length, b.length) / maxScore;
+    console.log(adjusted, a, b);
+    return 1 / (1 + adjusted);
 };
 
 const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
     const aTokens = descriptionTokens(a);
     const bTokens = descriptionTokens(b);
-    let count = 0;
+    const tokenCount = aTokens.length + bTokens.length;
+
+    let similarities: number[] = [];
     for (const aToken of aTokens) {
         for (const bToken of bTokens) {
-            const p = stringSimilarity(aToken, bToken);
-            // console.log(aToken, bToken, p);
-            count += p;
+            similarities.push(stringSimilarity(aToken, bToken));
         }
     }
-    return count / (aTokens.length + bTokens.length);
+
+    // Only consider best scores.
+    similarities = similarities.sort().slice(-tokenCount);
+
+    return similarities.reduce((acc, n) => acc + n, 0) / tokenCount;
 };
+
+// console.log(stringSimilarity("123aaa", "123"));
+// console.log(stringSimilarity("aaa123", "123"));
+// console.log(stringSimilarity("123", "123aaa"));
+// console.log(stringSimilarity("123", "aaa123"));
+
+// console.log(stringSimilarity("1234567890aaa", "1234567890"));
+// console.log(stringSimilarity("aaa1234567890", "1234567890"));
+// console.log(stringSimilarity("1234567890", "1234567890aaa"));
+// console.log(stringSimilarity("1234567890", "aaa1234567890"));
 
 export const dedupe = (transactions: Transaction[]): Transaction[] => {
     const amountMap: {[amount: number]: Transaction[]} = {};
