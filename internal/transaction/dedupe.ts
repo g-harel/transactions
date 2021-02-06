@@ -22,45 +22,52 @@ const descriptionTokens = (transaction: Transaction): string[] => {
         .map((token) => token.toLowerCase());
 };
 
-// Edit distance where inserts and removals are cheaper than replacements.
-const proximity = (a: string, b: string, m: number, n: number): number => {
-    if (m === 0) return n * 0.5;
-    if (n === 0) return m * 0.5;
+const editDistance = (a: string, b: string, m: number, n: number): number => {
+    if (m === 0) return n;
+    if (n === 0) return m;
 
     if (a[m - 1] === b[n - 1]) {
-        return proximity(a, b, m - 1, n - 1);
+        return editDistance(a, b, m - 1, n - 1);
     }
 
-    return Math.min(
-        0.5 + proximity(a, b, m, n - 1), // Insert
-        0.5 + proximity(a, b, m - 1, n), // Remove
-        1 + proximity(a, b, m - 1, n - 1), // Replace
+    return (
+        1 +
+        Math.min(
+            editDistance(a, b, m, n - 1), // Insert
+            editDistance(a, b, m - 1, n), // Remove
+            editDistance(a, b, m - 1, n - 1), // Replace
+        )
     );
 };
 
-const stringSimilarity = (a: string, b: string): number => {
-    const maxScore = Math.max(a.length, b.length);
-    const adjusted = 1 - proximity(a, b, a.length, b.length) / maxScore;
-    console.log(adjusted, a, b);
-    return 1 / (1 + adjusted);
-};
-
-const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
-    const aTokens = descriptionTokens(a);
-    const bTokens = descriptionTokens(b);
-    const tokenCount = aTokens.length + bTokens.length;
-
-    let similarities: number[] = [];
-    for (const aToken of aTokens) {
-        for (const bToken of bTokens) {
-            similarities.push(stringSimilarity(aToken, bToken));
+const longestSubstring = (a: string, b: string): number => {
+    let max = 0;
+    for (let i = 0; i < a.length; i++) {
+        for (let j = 0; j < b.length; j++) {
+            const maxSubstring = Math.min(a.length - i, b.length - i);
+            for (let k = 0; k < maxSubstring; k++) {
+                if (a[i + k] !== b[j + k]) break;
+                max = Math.max(max, k + 1);
+            }
         }
     }
+    return max;
+};
 
-    // Only consider best scores.
-    similarities = similarities.sort().slice(-tokenCount);
+// console.log(longestSubstring("abc", "1abc1"));
+// console.log(longestSubstring("abc", "cba"));
+// console.log(longestSubstring("a", "b"));
+// console.log(longestSubstring("11122", "2211a1"));
 
-    return similarities.reduce((acc, n) => acc + n, 0) / tokenCount;
+const stringSimilarity = (a: string, b: string): number => {
+    const maxDistance = Math.max(a.length, b.length);
+    const adjustedDistance =
+        1 - editDistance(a, b, a.length, b.length) / maxDistance;
+
+    const maxSubstring = Math.min(a.length, b.length);
+    const adjustedSubstring = longestSubstring(a, b) / maxSubstring;
+
+    return (adjustedDistance + adjustedSubstring) / 2;
 };
 
 // console.log(stringSimilarity("123aaa", "123"));
@@ -72,6 +79,26 @@ const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
 // console.log(stringSimilarity("aaa1234567890", "1234567890"));
 // console.log(stringSimilarity("1234567890", "1234567890aaa"));
 // console.log(stringSimilarity("1234567890", "aaa1234567890"));
+
+const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
+    const aTokens = descriptionTokens(a);
+    const bTokens = descriptionTokens(b);
+    const tokenCount = aTokens.length + bTokens.length;
+
+    let similarities: number[] = [];
+    for (const aToken of aTokens) {
+        for (const bToken of bTokens) {
+            const similarity = stringSimilarity(aToken, bToken);
+            // console.log(aToken, bToken, similarity);
+            similarities.push(similarity);
+        }
+    }
+
+    // Only consider best scores.
+    similarities = similarities.sort().slice(-tokenCount);
+
+    return similarities.reduce((acc, n) => acc + n, 0) / tokenCount;
+};
 
 export const dedupe = (transactions: Transaction[]): Transaction[] => {
     const amountMap: {[amount: number]: Transaction[]} = {};
