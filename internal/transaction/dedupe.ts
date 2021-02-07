@@ -22,25 +22,30 @@ const descriptionTokens = (transaction: Transaction): string[] => {
         .map((token) => token.toLowerCase());
 };
 
-const editDistance = (a: string, b: string, m: number, n: number): number => {
-    if (m === 0) return n;
-    if (n === 0) return m;
+const distanceRating = (a: string, b: string) => {
+    const editDistance = (m: number, n: number): number => {
+        if (m === 0) return n;
+        if (n === 0) return m;
 
-    if (a[m - 1] === b[n - 1]) {
-        return editDistance(a, b, m - 1, n - 1);
-    }
+        if (a[m - 1] === b[n - 1]) {
+            return editDistance(m - 1, n - 1);
+        }
 
-    return (
-        1 +
-        Math.min(
-            editDistance(a, b, m, n - 1), // Insert
-            editDistance(a, b, m - 1, n), // Remove
-            editDistance(a, b, m - 1, n - 1), // Replace
-        )
-    );
+        return (
+            1 +
+            Math.min(
+                editDistance(m, n - 1), // Insert
+                editDistance(m - 1, n), // Remove
+                editDistance(m - 1, n - 1), // Replace
+            )
+        );
+    };
+
+    const max = Math.max(a.length, b.length);
+    return 1 - editDistance(a.length, b.length) / max;
 };
 
-const longestSubstring = (a: string, b: string): number => {
+const substringRating = (a: string, b: string): number => {
     let max = 0;
     for (let i = 0; i < a.length; i++) {
         for (let j = 0; j < b.length; j++) {
@@ -51,34 +56,8 @@ const longestSubstring = (a: string, b: string): number => {
             }
         }
     }
-    return max;
+    return max / Math.min(a.length, b.length);
 };
-
-// console.log(longestSubstring("abc", "1abc1"));
-// console.log(longestSubstring("abc", "cba"));
-// console.log(longestSubstring("a", "b"));
-// console.log(longestSubstring("11122", "2211a1"));
-
-const stringSimilarity = (a: string, b: string): number => {
-    const maxDistance = Math.max(a.length, b.length);
-    const adjustedDistance =
-        1 - editDistance(a, b, a.length, b.length) / maxDistance;
-
-    const maxSubstring = Math.min(a.length, b.length);
-    const adjustedSubstring = longestSubstring(a, b) / maxSubstring;
-
-    return (adjustedDistance + adjustedSubstring) / 2;
-};
-
-// console.log(stringSimilarity("123aaa", "123"));
-// console.log(stringSimilarity("aaa123", "123"));
-// console.log(stringSimilarity("123", "123aaa"));
-// console.log(stringSimilarity("123", "aaa123"));
-
-// console.log(stringSimilarity("1234567890aaa", "1234567890"));
-// console.log(stringSimilarity("aaa1234567890", "1234567890"));
-// console.log(stringSimilarity("1234567890", "1234567890aaa"));
-// console.log(stringSimilarity("1234567890", "aaa1234567890"));
 
 const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
     const aTokens = descriptionTokens(a);
@@ -88,8 +67,10 @@ const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
     let similarities: number[] = [];
     for (const aToken of aTokens) {
         for (const bToken of bTokens) {
-            const similarity = stringSimilarity(aToken, bToken);
-            // console.log(aToken, bToken, similarity);
+            // Score should stay between 0 and 1 inclusive.
+            const similarity =
+                distanceRating(aToken, bToken) / 2 +
+                substringRating(aToken, bToken) / 2;
             similarities.push(similarity);
         }
     }
@@ -97,9 +78,17 @@ const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
     // Only consider best scores.
     similarities = similarities.sort().slice(-tokenCount);
 
-    return similarities.reduce((acc, n) => acc + n, 0) / tokenCount;
+    const similarity = similarities.reduce((acc, n) => acc + n, 0) / tokenCount;
+
+    // TODO Boost paypal similarity.
+    // if (isPayPal(a) || isPayPal(b)) {
+    //     return 1 - (1 - similarity) / Math.sqrt(2);
+    // }
+
+    return similarity;
 };
 
+// TODO add optional matcher duplicate sensitivity.
 export const dedupe = (transactions: Transaction[]): Transaction[] => {
     const amountMap: {[amount: number]: Transaction[]} = {};
 
@@ -114,20 +103,24 @@ export const dedupe = (transactions: Transaction[]): Transaction[] => {
     for (const similarTransactions of Object.values(amountMap)) {
         for (let i = 0; i < similarTransactions.length; i++) {
             let isDuplicate = false;
-            for (let j = 1; j < similarTransactions.length; j++) {
+            for (let j = i + 1; j < similarTransactions.length; j++) {
                 const current = similarTransactions[i];
                 const compare = similarTransactions[j];
-                if (isPayPal(current) || isPayPal(compare)) {
-                    if (daysDifference(current, compare) < 7) {
-                        isDuplicate = true;
-                        console.log(print(current));
-                        console.log(print(compare));
-                        console.log(
-                            "====",
-                            descriptionSimilarity(current, compare),
-                        );
-                        break;
-                    }
+
+                // Higher values mean higher chance of being different.
+                // Score should stay between 0 and 1 inclusive.
+                const descScore = 1 - descriptionSimilarity(current, compare);
+                const dateScore = 1 / (1 + daysDifference(current, compare));
+                const siblingScore = 1 / (1 + (similarTransactions.length - 1));
+                const similarity = (descScore + dateScore + siblingScore) / 3;
+
+                // TODO make more sensitive to date deltas.
+                if (similarity < 0.3) {
+                    console.log(print(current));
+                    console.log(print(compare));
+                    console.log("====", similarity);
+                    isDuplicate = true;
+                    break;
                 }
             }
             if (!isDuplicate) result.push(similarTransactions[i]);

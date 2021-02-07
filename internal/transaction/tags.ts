@@ -23,6 +23,7 @@ const match = (matcher: Matcher, transaction: Transaction): boolean => {
     }
 };
 
+// TODO make file format json.
 export const tagTransactions = (
     fileName: string,
     transactions: Transaction[],
