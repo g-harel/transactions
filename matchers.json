@@ -1,0 +1,652 @@
+[
+    {
+        "tags": ["ignore"],
+        "pattern": "balance forward"
+    },
+
+    {
+        "tags": ["income", "interest"],
+        "pattern": "dividend"
+    },
+    {
+        "tags": ["income", "interest"],
+        "pattern": "interest"
+    },
+
+    {
+        "tags": ["income", "sale"],
+        "pattern": "dp chq mob"
+    },
+    {
+        "tags": ["income", "sale"],
+        "pattern": "nacho"
+    },
+    {
+        "tags": ["income", "sale"],
+        "pattern": "zelle.*from"
+    },
+
+    {
+        "tags": ["income", "tax"],
+        "pattern": "^tps$"
+    },
+    {
+        "tags": ["income", "tax"],
+        "pattern": "impot solidarite"
+    },
+    {
+        "tags": ["income", "tax"],
+        "pattern": "tax ref"
+    },
+
+    {
+        "tags": ["income", "work"],
+        "pattern": "deposit"
+    },
+    {
+        "tags": ["income", "work"],
+        "pattern": "employer contribution"
+    },
+    {
+        "tags": ["income", "work"],
+        "pattern": "fedwire credit"
+    },
+    {
+        "tags": ["income", "work"],
+        "pattern": "google llc"
+    },
+    {
+        "tags": ["income", "work"],
+        "pattern": "morgan stanley.*(credit|payment)"
+    },
+
+    {
+        "tags": ["investment"],
+        "pattern": "investment: [A-Z]+"
+    },
+    {
+        "tags": ["investment"],
+        "pattern": "vanguard.*buy"
+    },
+
+    {
+        "tags": ["spending", "fee"],
+        "pattern": "domestic incoming wire fee"
+    },
+    {
+        "tags": ["spending", "fee"],
+        "pattern": "foreign exchange rate adjustment"
+    },
+    {
+        "tags": ["spending", "fee"],
+        "pattern": "foreign transaction fee"
+    },
+    {
+        "tags": ["spending", "fee"],
+        "pattern": "healthequity inc"
+    },
+    {
+        "tags": ["spending", "fee"],
+        "pattern": "maintenance fee"
+    },
+
+    {
+        "tags": ["spending", "food"],
+        "pattern": "1lncln prk"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "7-eleven"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "althea"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "amazon tips"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "burger king"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "california food mart"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "cescas"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "chipotle"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "city tap"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "craft pizza"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "cvs\\/pharmacy"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "do-rite"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "domino's"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "dunkin"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "federales"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "freshly"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "fulton market local"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "giordano'?s"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "h mart"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "harold's"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "jewel osco"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "la fournette"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "luke's"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "mcdonald's"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "mothers chicago"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "noodles etc"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "pepsi(ven)?"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "popeyes"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "sangamon chicago"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "shake shack"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "south loop market"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "teamo boba"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "the monkey's paw"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "tikka n  curry"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "uber.*eats"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "vanille"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "venmo"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "vivi bubble tea"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "walgreens"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "welcome back lounge"
+    },
+    {
+        "tags": ["spending", "food"],
+        "pattern": "zelle.*to j ?ames"
+    },
+
+    {
+        "tags": ["spending", "games"],
+        "pattern": "bumble"
+    },
+    {
+        "tags": ["spending", "games"],
+        "pattern": "kinguin"
+    },
+    {
+        "tags": ["spending", "games"],
+        "pattern": "mojang"
+    },
+    {
+        "tags": ["spending", "games"],
+        "pattern": "nadav fima"
+    },
+    {
+        "tags": ["spending", "games"],
+        "pattern": "origin.com"
+    },
+    {
+        "tags": ["spending", "games"],
+        "pattern": "red apps"
+    },
+    {
+        "tags": ["spending", "games"],
+        "pattern": "riot"
+    },
+    {
+        "tags": ["spending", "games"],
+        "pattern": "sirvo llc"
+    },
+    {
+        "tags": ["spending", "games"],
+        "pattern": "steam(games\\.com| purchase)"
+    },
+
+    {
+        "tags": ["spending", "housing"],
+        "pattern": "j?in's electric"
+    },
+    {
+        "tags": ["spending", "housing"],
+        "pattern": "zelle.*to w"
+    },
+
+    {
+        "tags": ["spending", "leisure"],
+        "pattern": "alpine valley"
+    },
+    {
+        "tags": ["spending", "leisure"],
+        "pattern": "atm withdrawal"
+    },
+    {
+        "tags": ["spending", "leisure"],
+        "pattern": "chestnut mountain"
+    },
+    {
+        "tags": ["spending", "leisure"],
+        "pattern": "chicago architect"
+    },
+    {
+        "tags": ["spending", "leisure"],
+        "pattern": "chicago park distr"
+    },
+    {
+        "tags": ["spending", "leisure"],
+        "pattern": "uber.*trip"
+    },
+    {
+        "tags": ["spending", "leisure"],
+        "pattern": "zelle.*to p"
+    },
+
+    {
+        "tags": ["spending", "mystery"],
+        "pattern": "fedex office?"
+    },
+
+    {
+        "tags": ["spending", "project"],
+        "pattern": "amazon web services"
+    },
+    {
+        "tags": ["spending", "project"],
+        "pattern": "google.*(domains|services|cloud)"
+    },
+
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "amazon\\.com\\*"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "amzn mktp"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "bestbuy"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "dba.*chip.*off"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "dbrand"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "ebay"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "facebook"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "formd"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "ikea.com"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "indiegogo"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "micro ?center"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "pocket-tripod-pro"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "target"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "topo designs"
+    },
+    {
+        "tags": ["spending", "shopping"],
+        "pattern": "vans inc"
+    },
+
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "(mass)?drop(\\.com)?"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "\\*3334186279"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "^computers$"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "aliexpress"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "archetype"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "cephalopodc?"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "cftkb"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "dixie mech"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "glorious pc"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "kebo\\.store"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "keyboard?"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "lillekrydde"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "malvix"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "nice technologies"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "nicetechnol"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "novelkeys"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "originative"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "pikatea"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "projectkb"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "rama ?works"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "ringerkeys\\.com"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "smpl supply"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "spacecables"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "stupidfish"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "teal technik"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "thekey\\.company"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "tonglingheh"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "unicomp, inc."
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "valvik"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "zap cables"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "zeal generation"
+    },
+    {
+        "tags": ["spending", "shopping", "keyboard"],
+        "pattern": "zhantu huang"
+    },
+
+    {
+        "tags": ["spending", "subscription"],
+        "pattern": "agilebits|1password"
+    },
+    {
+        "tags": ["spending", "subscription"],
+        "pattern": "amazon prime"
+    },
+    {
+        "tags": ["spending", "subscription"],
+        "pattern": "average tech revi(ews)?"
+    },
+    {
+        "tags": ["spending", "subscription"],
+        "pattern": "disney plus"
+    },
+    {
+        "tags": ["spending", "subscription"],
+        "pattern": "github"
+    },
+    {
+        "tags": ["spending", "subscription"],
+        "pattern": "google storage?"
+    },
+    {
+        "tags": ["spending", "subscription"],
+        "pattern": "n(ew )?y(ork)? times"
+    },
+    {
+        "tags": ["spending", "subscription"],
+        "pattern": "netflix\\.com"
+    },
+    {
+        "tags": ["spending", "subscription"],
+        "pattern": "patreon"
+    },
+
+    {
+        "tags": ["spending", "travel"],
+        "pattern": "air canada"
+    },
+
+    {
+        "tags": ["spending", "utility"],
+        "pattern": "bell mobility"
+    },
+    {
+        "tags": ["spending", "utility"],
+        "pattern": "com(m )?ed"
+    },
+    {
+        "tags": ["spending", "utility"],
+        "pattern": "google fi"
+    },
+    {
+        "tags": ["spending", "utility"],
+        "pattern": "hair cuttery"
+    },
+    {
+        "tags": ["spending", "utility"],
+        "pattern": "midwest express clinic"
+    },
+    {
+        "tags": ["spending", "utility"],
+        "pattern": "quest diagnostics"
+    },
+    {
+        "tags": ["spending", "utility"],
+        "pattern": "state farm"
+    },
+    {
+        "tags": ["spending", "utility"],
+        "pattern": "supercuts"
+    },
+    {
+        "tags": ["spending", "utility"],
+        "pattern": "the ups store"
+    },
+    {
+        "tags": ["spending", "utility"],
+        "pattern": "usps change of address?"
+    },
+    {
+        "tags": ["spending", "utility"],
+        "pattern": "usps po"
+    },
+    {
+        "tags": ["spending", "utility"],
+        "pattern": "ventra"
+    },
+
+    {
+        "tags": ["tax"],
+        "pattern": "ach interac w3"
+    },
+    {
+        "tags": ["transfer"],
+        "pattern": "autosave"
+    },
+    {
+        "tags": ["transfer"],
+        "pattern": "payment (received|.*thank you|to.*card)"
+    },
+    {
+        "tags": ["transfer"],
+        "pattern": "vanguard.*edi pa?yme?nts"
+    },
+    {
+        "tags": ["transfer"],
+        "pattern": "virement w3"
+    },
+    {
+        "tags": ["transfer"],
+        "pattern": "webclient funds transfer"
+    }
+]

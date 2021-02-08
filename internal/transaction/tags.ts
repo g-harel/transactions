@@ -1,20 +1,14 @@
-import {readLines} from "../ingest/files";
-import {print, Transaction} from "./transaction";
+import {readJSON} from "../ingest/files";
+import {error} from "../log";
+import {printTransaction, Transaction} from "./transaction";
 
 interface Matcher {
     tags: string[];
     pattern: RegExp;
-    raw: string;
 }
 
-const parseMatcherLine = (line: string): Matcher => {
-    // TODO detect broken lines (parts.length > 2).
-    const parts = line.split(" :: ");
-    return {
-        tags: parts[0].split(" "),
-        pattern: new RegExp(parts[1], "i"),
-        raw: line,
-    };
+const printMatcher = (matcher: Matcher): string => {
+    return JSON.stringify(matcher);
 };
 
 const match = (matcher: Matcher, transaction: Transaction): boolean => {
@@ -23,13 +17,15 @@ const match = (matcher: Matcher, transaction: Transaction): boolean => {
     }
 };
 
-// TODO make file format json.
 export const tagTransactions = (
-    fileName: string,
+    matchFile: string,
     transactions: Transaction[],
 ): Transaction[] => {
     const tagged: Transaction[] = [];
-    const matchers = readLines(fileName).filter(Boolean).map(parseMatcherLine);
+    const matchers: Matcher[] = readJSON(matchFile).map((m) => {
+        m.pattern = new RegExp(m.pattern, "i");
+        return m;
+    });
 
     for (const transaction of transactions) {
         let matched: Matcher = null;
@@ -37,16 +33,19 @@ export const tagTransactions = (
         for (const matcher of matchers) {
             if (match(matcher, transaction)) {
                 if (matched !== null) {
-                    console.log("ERROR Multiple:", print(transaction));
-                    console.log("  " + matched.raw);
-                    console.log("  " + matcher.raw);
+                    error(
+                        "Multiple:",
+                        printTransaction(transaction),
+                        "\n  " + printMatcher(matched),
+                        "\n  " + printMatcher(matcher),
+                    );
                 }
                 tags = matcher.tags;
                 matched = matcher;
             }
         }
         if (tags.length === 0) {
-            console.log("ERROR Unmatched:", print(transaction));
+            error("Unmatched:", printTransaction(transaction));
         }
         tagged.push(Object.assign({}, transaction, {tags}));
     }

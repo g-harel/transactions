@@ -6,7 +6,7 @@ export interface Transaction {
     tags: string[];
 }
 
-export const print = (transaction: Transaction): string => {
+export const printTransaction = (transaction: Transaction): string => {
     const descriptions: Record<string, boolean> = {};
     for (const description of transaction.descriptions) {
         descriptions[description] = true;

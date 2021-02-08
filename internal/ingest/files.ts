@@ -8,6 +8,10 @@ export const readLines = (fileName: string): string[] => {
     return readFile(fileName).split("\n");
 };
 
+export const readJSON = (fileName: string): any => {
+    return JSON.parse(readFile(fileName));
+};
+
 export const readCSV = (fileName: string): string[][] => {
     return (
         readLines(fileName)

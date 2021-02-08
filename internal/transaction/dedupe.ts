@@ -1,4 +1,5 @@
-import {print, Transaction} from "./transaction";
+import {debug} from "../log";
+import {printTransaction, Transaction} from "./transaction";
 
 const isPayPal = (transaction: Transaction): boolean => {
     for (const description of transaction.descriptions) {
@@ -88,8 +89,10 @@ const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
     return similarity;
 };
 
-// TODO add optional matcher duplicate sensitivity.
 export const dedupe = (transactions: Transaction[]): Transaction[] => {
+    // TODO add optional matcher duplicate sensitivity.
+    return transactions;
+
     const amountMap: {[amount: number]: Transaction[]} = {};
 
     for (const transaction of transactions) {
@@ -116,9 +119,9 @@ export const dedupe = (transactions: Transaction[]): Transaction[] => {
 
                 // TODO make more sensitive to date deltas.
                 if (similarity < 0.3) {
-                    console.log(print(current));
-                    console.log(print(compare));
-                    console.log("====", similarity);
+                    debug(printTransaction(current));
+                    debug(printTransaction(compare));
+                    debug("====", similarity);
                     isDuplicate = true;
                     break;
                 }
