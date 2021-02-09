@@ -8,7 +8,10 @@ interface Matcher {
 }
 
 const printMatcher = (matcher: Matcher): string => {
-    return JSON.stringify(matcher);
+    return `
+${matcher.pattern}
+-----------------------------
+[${matcher.tags.join(", ")}]`.trim();
 };
 
 const match = (matcher: Matcher, transaction: Transaction): boolean => {
@@ -34,10 +37,10 @@ export const tagTransactions = (
             if (match(matcher, transaction)) {
                 if (matched !== null) {
                     error(
-                        "Multiple:",
+                        "Ambiguous transaction match.",
                         printTransaction(transaction),
-                        "\n  " + printMatcher(matched),
-                        "\n  " + printMatcher(matcher),
+                        printMatcher(matched),
+                        printMatcher(matcher),
                     );
                 }
                 tags = matcher.tags;
@@ -45,7 +48,7 @@ export const tagTransactions = (
             }
         }
         if (tags.length === 0) {
-            error("Unmatched:", printTransaction(transaction));
+            error("Unmatched transaction.", printTransaction(transaction));
         }
         tagged.push(Object.assign({}, transaction, {tags}));
     }

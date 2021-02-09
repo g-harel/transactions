@@ -11,11 +11,13 @@ export const printTransaction = (transaction: Transaction): string => {
     for (const description of transaction.descriptions) {
         descriptions[description] = true;
     }
-    return [
-        transaction.id,
-        Object.keys(descriptions).join("|").slice(0, 42).padEnd(42),
-        transaction.amount.toFixed(2).padStart(9),
-        transaction.date.toISOString().slice(0, 10),
-        `[${transaction.tags.join(", ")}]`,
-    ].join(" ");
+    const date = transaction.date.toISOString().slice(0, 10);
+    const amount = transaction.amount.toFixed(2);
+    return `
+id         date        amount
+#${transaction.id}  ${date}  ${amount}
+-----------------------------
+[${transaction.tags.join(", ")}]
+-----------------------------
+${transaction.descriptions.join("\n")}`.trim();
 };

@@ -3,7 +3,6 @@
         "tags": ["ignore"],
         "pattern": "balance forward"
     },
-
     {
         "tags": ["income", "interest"],
         "pattern": "dividend"
@@ -12,7 +11,6 @@
         "tags": ["income", "interest"],
         "pattern": "interest"
     },
-
     {
         "tags": ["income", "sale"],
         "pattern": "dp chq mob"
@@ -25,7 +23,6 @@
         "tags": ["income", "sale"],
         "pattern": "zelle.*from"
     },
-
     {
         "tags": ["income", "tax"],
         "pattern": "^tps$"
@@ -38,7 +35,6 @@
         "tags": ["income", "tax"],
         "pattern": "tax ref"
     },
-
     {
         "tags": ["income", "work"],
         "pattern": "deposit"
@@ -59,7 +55,6 @@
         "tags": ["income", "work"],
         "pattern": "morgan stanley.*(credit|payment)"
     },
-
     {
         "tags": ["investment"],
         "pattern": "investment: [A-Z]+"
@@ -68,7 +63,6 @@
         "tags": ["investment"],
         "pattern": "vanguard.*buy"
     },
-
     {
         "tags": ["spending", "fee"],
         "pattern": "domestic incoming wire fee"
@@ -89,7 +83,6 @@
         "tags": ["spending", "fee"],
         "pattern": "maintenance fee"
     },
-
     {
         "tags": ["spending", "food"],
         "pattern": "1lncln prk"
@@ -254,7 +247,6 @@
         "tags": ["spending", "food"],
         "pattern": "zelle.*to j ?ames"
     },
-
     {
         "tags": ["spending", "games"],
         "pattern": "bumble"
@@ -291,7 +283,6 @@
         "tags": ["spending", "games"],
         "pattern": "steam(games\\.com| purchase)"
     },
-
     {
         "tags": ["spending", "housing"],
         "pattern": "j?in's electric"
@@ -300,7 +291,6 @@
         "tags": ["spending", "housing"],
         "pattern": "zelle.*to w"
     },
-
     {
         "tags": ["spending", "leisure"],
         "pattern": "alpine valley"
@@ -329,12 +319,10 @@
         "tags": ["spending", "leisure"],
         "pattern": "zelle.*to p"
     },
-
     {
         "tags": ["spending", "mystery"],
         "pattern": "fedex office?"
     },
-
     {
         "tags": ["spending", "project"],
         "pattern": "amazon web services"
@@ -343,7 +331,6 @@
         "tags": ["spending", "project"],
         "pattern": "google.*(domains|services|cloud)"
     },
-
     {
         "tags": ["spending", "shopping"],
         "pattern": "amazon\\.com\\*"
@@ -404,7 +391,6 @@
         "tags": ["spending", "shopping"],
         "pattern": "vans inc"
     },
-
     {
         "tags": ["spending", "shopping", "keyboard"],
         "pattern": "(mass)?drop(\\.com)?"
@@ -533,7 +519,6 @@
         "tags": ["spending", "shopping", "keyboard"],
         "pattern": "zhantu huang"
     },
-
     {
         "tags": ["spending", "subscription"],
         "pattern": "agilebits|1password"
@@ -570,12 +555,10 @@
         "tags": ["spending", "subscription"],
         "pattern": "patreon"
     },
-
     {
         "tags": ["spending", "travel"],
         "pattern": "air canada"
     },
-
     {
         "tags": ["spending", "utility"],
         "pattern": "bell mobility"
@@ -624,7 +607,6 @@
         "tags": ["spending", "utility"],
         "pattern": "ventra"
     },
-
     {
         "tags": ["tax"],
         "pattern": "ach interac w3"
