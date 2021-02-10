@@ -1,4 +1,4 @@
-import {debug} from "../log";
+import {logDebug} from "../log";
 import {printTransaction, Transaction} from "./transaction";
 
 const isPayPal = (transaction: Transaction): boolean => {
@@ -119,9 +119,9 @@ export const dedupe = (transactions: Transaction[]): Transaction[] => {
 
                 // TODO make more sensitive to date deltas.
                 if (similarity < 0.3) {
-                    debug(printTransaction(current));
-                    debug(printTransaction(compare));
-                    debug("====", similarity);
+                    logDebug(printTransaction(current));
+                    logDebug(printTransaction(compare));
+                    logDebug("====", similarity);
                     isDuplicate = true;
                     break;
                 }

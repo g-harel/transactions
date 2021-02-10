@@ -1,5 +1,5 @@
-import {readJSON} from "../ingest/files";
-import {error} from "../log";
+import {readFile} from "../fs";
+import {logError} from "../log";
 import {printTransaction, Transaction} from "./transaction";
 
 interface Matcher {
@@ -25,7 +25,7 @@ export const tagTransactions = (
     transactions: Transaction[],
 ): Transaction[] => {
     const tagged: Transaction[] = [];
-    const matchers: Matcher[] = readJSON(matchFile).map((m) => {
+    const matchers: Matcher[] = JSON.parse(readFile(matchFile)).map((m) => {
         m.pattern = new RegExp(m.pattern, "i");
         return m;
     });
@@ -36,7 +36,7 @@ export const tagTransactions = (
         for (const matcher of matchers) {
             if (match(matcher, transaction)) {
                 if (matched !== null) {
-                    error(
+                    logError(
                         "Ambiguous transaction match.",
                         printTransaction(transaction),
                         printMatcher(matched),
@@ -48,7 +48,7 @@ export const tagTransactions = (
             }
         }
         if (tags.length === 0) {
-            error("Unmatched transaction.", printTransaction(transaction));
+            logError("Unmatched transaction.", printTransaction(transaction));
         }
         tagged.push(Object.assign({}, transaction, {tags}));
     }

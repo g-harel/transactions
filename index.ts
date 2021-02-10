@@ -1,8 +1,8 @@
-import {readMintArchive} from "./internal/ingest/mint";
 import {tagTransactions} from "./internal/transaction/tags";
 import {dedupe} from "./internal/transaction/dedupe";
 import {filter, sort, sum} from "./internal/transaction/query";
 import {printTransaction} from "./internal/transaction/transaction";
+import {slurp} from "./internal/slurp";
 
 // TODO
 // Deduplicate transactions in close time range and same absolute amount. (paypal)
@@ -12,7 +12,7 @@ import {printTransaction} from "./internal/transaction/transaction";
 
 const transactions = tagTransactions(
     "matchers.json",
-    dedupe(readMintArchive(".transactions.csv")),
+    dedupe(slurp("transactions")),
 );
 
 if (false) {

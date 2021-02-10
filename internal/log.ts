@@ -9,7 +9,7 @@ const logFn = (label: string, c: chalk.Chalk): LogFn => {
         console.log(c(label), message);
 
         for (let i = 0; i < artifacts.length; i++) {
-            const lines = String(artifacts[i]).split("\n")
+            const lines = String(artifacts[i]).split("\n");
             for (let j = 0; j < lines.length; j++) {
                 console.log(c("│"), chalk.grey(lines[j]));
 
@@ -27,6 +27,6 @@ const logFn = (label: string, c: chalk.Chalk): LogFn => {
     };
 };
 
-export const info = logFn("INFO", chalk.bold.green);
-export const error = logFn("ERROR", chalk.bold.red);
-export const debug = logFn("DEBUG", chalk.bold.blue);
+export const logInfo = logFn("INFO", chalk.bold.green);
+export const logError = logFn("ERROR", chalk.bold.red);
+export const logDebug = logFn("DEBUG", chalk.bold.blue);
