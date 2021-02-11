@@ -1,4 +1,5 @@
 import {logDebug} from "../log";
+import {MatchedTransaction, printMatchedTransaction} from "./tags";
 import {printTransaction, Transaction} from "./transaction";
 
 const isPayPal = (transaction: Transaction): boolean => {
@@ -89,11 +90,25 @@ const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
     return similarity;
 };
 
-export const dedupe = (transactions: Transaction[]): Transaction[] => {
-    // TODO add optional matcher duplicate sensitivity.
-    return transactions;
+// https://www.desmos.com/calculator/atfh1nekmi
+const rateQuad = (rating: number, max: number): number => {
+    if (rating < 0) return 0;
+    if (rating > max) return 1;
+    return 1 - (rating / max) ** 2;
+};
+const rateSin = (rating: number, max: number): number => {
+    if (rating < 0) return 0;
+    if (rating > max) return 1;
+    return 0.5 + 0.5 * Math.sin((rating / max) * Math.PI + 0.5 * Math.PI);
+};
+const rateExp = (rating: number, halfLife: number): number => {
+    return 1 / (1 + rating / halfLife);
+};
 
-    const amountMap: {[amount: number]: Transaction[]} = {};
+export const dedupe = (
+    transactions: MatchedTransaction[],
+): MatchedTransaction[] => {
+    const amountMap: {[amount: number]: MatchedTransaction[]} = {};
 
     for (const transaction of transactions) {
         if (amountMap[transaction.amount] === undefined) {
@@ -102,31 +117,39 @@ export const dedupe = (transactions: Transaction[]): Transaction[] => {
         amountMap[transaction.amount].push(transaction);
     }
 
-    const result: Transaction[] = [];
+    const result: MatchedTransaction[] = [];
     for (const similarTransactions of Object.values(amountMap)) {
         for (let i = 0; i < similarTransactions.length; i++) {
+            const current = similarTransactions[i];
+            if (!current.duplicateSensitivity) {
+                result.push(current);
+                continue;
+            }
+
             let isDuplicate = false;
             for (let j = i + 1; j < similarTransactions.length; j++) {
-                const current = similarTransactions[i];
                 const compare = similarTransactions[j];
+                if (!compare.duplicateSensitivity) continue;
 
                 // Higher values mean higher chance of being different.
                 // Score should stay between 0 and 1 inclusive.
                 const descScore = 1 - descriptionSimilarity(current, compare);
-                const dateScore = 1 / (1 + daysDifference(current, compare));
-                const siblingScore = 1 / (1 + (similarTransactions.length - 1));
+                const dateScore = rateSin(daysDifference(current, compare), 7);
+                const siblingScore = rateExp(similarTransactions.length - 1, 4);
                 const similarity = (descScore + dateScore + siblingScore) / 3;
 
-                // TODO make more sensitive to date deltas.
+                // TODO use sensitivity + make sure scores are in same direction.
                 if (similarity < 0.3) {
-                    logDebug(printTransaction(current));
-                    logDebug(printTransaction(compare));
-                    logDebug("====", similarity);
+                    logDebug(
+                        `Duplicate transaction (${similarity})`,
+                        printMatchedTransaction(current),
+                        printMatchedTransaction(compare),
+                    );
                     isDuplicate = true;
                     break;
                 }
             }
-            if (!isDuplicate) result.push(similarTransactions[i]);
+            if (!isDuplicate) result.push(current);
         }
     }
 

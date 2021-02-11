@@ -10,9 +10,8 @@ import {slurp} from "./internal/slurp";
 // Filter with OR/NOT/AND logic.
 // Toggleable verbose logs for ignored stuff and errors.
 
-const transactions = tagTransactions(
-    "matchers.json",
-    dedupe(slurp("transactions")),
+const transactions = dedupe(
+    tagTransactions("matchers.json", slurp("transactions")),
 );
 
 if (false) {

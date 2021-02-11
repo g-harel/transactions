@@ -3,8 +3,9 @@ import {logError} from "../log";
 import {printTransaction, Transaction} from "./transaction";
 
 interface Matcher {
-    tags: string[];
     pattern: RegExp;
+    tags: string[];
+    duplicateSensitivity?: number; // 0-1
 }
 
 const printMatcher = (matcher: Matcher): string => {
@@ -12,6 +13,19 @@ const printMatcher = (matcher: Matcher): string => {
 ${matcher.pattern}
 -----------------------------
 [${matcher.tags.join(", ")}]`.trim();
+};
+
+export interface MatchedTransaction extends Transaction {
+    tags: string[];
+    duplicateSensitivity?: number;
+}
+
+export const printMatchedTransaction = (
+    transaction: MatchedTransaction,
+): string => {
+    return `${printTransaction(transaction)}
+-----------------------------
+[${transaction.tags.join(", ")}]`.trim();
 };
 
 const match = (matcher: Matcher, transaction: Transaction): boolean => {
@@ -23,8 +37,8 @@ const match = (matcher: Matcher, transaction: Transaction): boolean => {
 export const tagTransactions = (
     matchFile: string,
     transactions: Transaction[],
-): Transaction[] => {
-    const tagged: Transaction[] = [];
+): MatchedTransaction[] => {
+    const tagged: MatchedTransaction[] = [];
     const matchers: Matcher[] = JSON.parse(readFile(matchFile)).map((m) => {
         m.pattern = new RegExp(m.pattern, "i");
         return m;
@@ -32,7 +46,6 @@ export const tagTransactions = (
 
     for (const transaction of transactions) {
         let matched: Matcher = null;
-        let tags: string[] = [];
         for (const matcher of matchers) {
             if (match(matcher, transaction)) {
                 if (matched !== null) {
@@ -43,14 +56,19 @@ export const tagTransactions = (
                         printMatcher(matcher),
                     );
                 }
-                tags = matcher.tags;
                 matched = matcher;
             }
         }
-        if (tags.length === 0) {
+        if (matched === null) {
             logError("Unmatched transaction.", printTransaction(transaction));
+            continue;
         }
-        tagged.push(Object.assign({}, transaction, {tags}));
+        tagged.push(
+            Object.assign({}, transaction, {
+                tags: matched.tags,
+                duplicateSensitivity: matched.duplicateSensitivity,
+            }),
+        );
     }
 
     return tagged;

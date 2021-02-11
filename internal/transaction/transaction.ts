@@ -3,7 +3,6 @@ export interface Transaction {
     date: Date;
     descriptions: string[];
     amount: number;
-    tags: string[];
 }
 
 export const printTransaction = (transaction: Transaction): string => {
@@ -16,8 +15,6 @@ export const printTransaction = (transaction: Transaction): string => {
     return `
 id         date        amount
 #${transaction.id}  ${date}  ${amount}
------------------------------
-[${transaction.tags.join(", ")}]
 -----------------------------
 ${transaction.descriptions.join("\n")}`.trim();
 };

@@ -1,634 +1,792 @@
 [
     {
+        "pattern": "balance forward",
         "tags": ["ignore"],
-        "pattern": "balance forward"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "dividend",
         "tags": ["income", "interest"],
-        "pattern": "dividend"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "interest",
         "tags": ["income", "interest"],
-        "pattern": "interest"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "dp chq mob",
         "tags": ["income", "sale"],
-        "pattern": "dp chq mob"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "nacho",
         "tags": ["income", "sale"],
-        "pattern": "nacho"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "zelle.*from",
         "tags": ["income", "sale"],
-        "pattern": "zelle.*from"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "^tps$",
         "tags": ["income", "tax"],
-        "pattern": "^tps$"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "impot solidarite",
         "tags": ["income", "tax"],
-        "pattern": "impot solidarite"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "tax ref",
         "tags": ["income", "tax"],
-        "pattern": "tax ref"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "deposit",
         "tags": ["income", "work"],
-        "pattern": "deposit"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "employer contribution",
         "tags": ["income", "work"],
-        "pattern": "employer contribution"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "fedwire credit",
         "tags": ["income", "work"],
-        "pattern": "fedwire credit"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "google llc",
         "tags": ["income", "work"],
-        "pattern": "google llc"
+        "duplicateSensitivity": 0.0
     },
     {
+        "pattern": "morgan stanley.*(credit|payment)",
         "tags": ["income", "work"],
-        "pattern": "morgan stanley.*(credit|payment)"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "investment: [A-Z]+",
         "tags": ["investment"],
-        "pattern": "investment: [A-Z]+"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "vanguard.*buy",
         "tags": ["investment"],
-        "pattern": "vanguard.*buy"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "domestic incoming wire fee",
         "tags": ["spending", "fee"],
-        "pattern": "domestic incoming wire fee"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "foreign exchange rate adjustment",
         "tags": ["spending", "fee"],
-        "pattern": "foreign exchange rate adjustment"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "foreign transaction fee",
         "tags": ["spending", "fee"],
-        "pattern": "foreign transaction fee"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "healthequity inc",
         "tags": ["spending", "fee"],
-        "pattern": "healthequity inc"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "maintenance fee",
         "tags": ["spending", "fee"],
-        "pattern": "maintenance fee"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "1lncln prk",
         "tags": ["spending", "food"],
-        "pattern": "1lncln prk"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "7-eleven",
         "tags": ["spending", "food"],
-        "pattern": "7-eleven"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "althea",
         "tags": ["spending", "food"],
-        "pattern": "althea"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "amazon tips",
         "tags": ["spending", "food"],
-        "pattern": "amazon tips"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "burger king",
         "tags": ["spending", "food"],
-        "pattern": "burger king"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "california food mart",
         "tags": ["spending", "food"],
-        "pattern": "california food mart"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "cescas",
         "tags": ["spending", "food"],
-        "pattern": "cescas"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "chipotle",
         "tags": ["spending", "food"],
-        "pattern": "chipotle"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "city tap",
         "tags": ["spending", "food"],
-        "pattern": "city tap"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "craft pizza",
         "tags": ["spending", "food"],
-        "pattern": "craft pizza"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "cvs\\/pharmacy",
         "tags": ["spending", "food"],
-        "pattern": "cvs\\/pharmacy"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "do-rite",
         "tags": ["spending", "food"],
-        "pattern": "do-rite"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "domino's",
         "tags": ["spending", "food"],
-        "pattern": "domino's"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "dunkin",
         "tags": ["spending", "food"],
-        "pattern": "dunkin"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "federales",
         "tags": ["spending", "food"],
-        "pattern": "federales"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "freshly",
         "tags": ["spending", "food"],
-        "pattern": "freshly"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "fulton market local",
         "tags": ["spending", "food"],
-        "pattern": "fulton market local"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "giordano'?s",
         "tags": ["spending", "food"],
-        "pattern": "giordano'?s"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "h mart",
         "tags": ["spending", "food"],
-        "pattern": "h mart"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "harold's",
         "tags": ["spending", "food"],
-        "pattern": "harold's"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "jewel osco",
         "tags": ["spending", "food"],
-        "pattern": "jewel osco"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "la fournette",
         "tags": ["spending", "food"],
-        "pattern": "la fournette"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "luke's",
         "tags": ["spending", "food"],
-        "pattern": "luke's"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "mcdonald's",
         "tags": ["spending", "food"],
-        "pattern": "mcdonald's"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "mothers chicago",
         "tags": ["spending", "food"],
-        "pattern": "mothers chicago"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "noodles etc",
         "tags": ["spending", "food"],
-        "pattern": "noodles etc"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "pepsi(ven)?",
         "tags": ["spending", "food"],
-        "pattern": "pepsi(ven)?"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "popeyes",
         "tags": ["spending", "food"],
-        "pattern": "popeyes"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "sangamon chicago",
         "tags": ["spending", "food"],
-        "pattern": "sangamon chicago"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "shake shack",
         "tags": ["spending", "food"],
-        "pattern": "shake shack"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "south loop market",
         "tags": ["spending", "food"],
-        "pattern": "south loop market"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "teamo boba",
         "tags": ["spending", "food"],
-        "pattern": "teamo boba"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "the monkey's paw",
         "tags": ["spending", "food"],
-        "pattern": "the monkey's paw"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "tikka n  curry",
         "tags": ["spending", "food"],
-        "pattern": "tikka n  curry"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "uber.*eats",
         "tags": ["spending", "food"],
-        "pattern": "uber.*eats"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "vanille",
         "tags": ["spending", "food"],
-        "pattern": "vanille"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "venmo",
         "tags": ["spending", "food"],
-        "pattern": "venmo"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "vivi bubble tea",
         "tags": ["spending", "food"],
-        "pattern": "vivi bubble tea"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "walgreens",
         "tags": ["spending", "food"],
-        "pattern": "walgreens"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "welcome back lounge",
         "tags": ["spending", "food"],
-        "pattern": "welcome back lounge"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "zelle.*to j ?ames",
         "tags": ["spending", "food"],
-        "pattern": "zelle.*to j ?ames"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "bumble",
         "tags": ["spending", "games"],
-        "pattern": "bumble"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "kinguin",
         "tags": ["spending", "games"],
-        "pattern": "kinguin"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "mojang",
         "tags": ["spending", "games"],
-        "pattern": "mojang"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "nadav fima",
         "tags": ["spending", "games"],
-        "pattern": "nadav fima"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "origin.com",
         "tags": ["spending", "games"],
-        "pattern": "origin.com"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "red apps",
         "tags": ["spending", "games"],
-        "pattern": "red apps"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "riot",
         "tags": ["spending", "games"],
-        "pattern": "riot"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "sirvo llc",
         "tags": ["spending", "games"],
-        "pattern": "sirvo llc"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "steam(games\\.com| purchase)",
         "tags": ["spending", "games"],
-        "pattern": "steam(games\\.com| purchase)"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "j?in's electric",
         "tags": ["spending", "housing"],
-        "pattern": "j?in's electric"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "zelle.*to w",
         "tags": ["spending", "housing"],
-        "pattern": "zelle.*to w"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "alpine valley",
         "tags": ["spending", "leisure"],
-        "pattern": "alpine valley"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "atm withdrawal",
         "tags": ["spending", "leisure"],
-        "pattern": "atm withdrawal"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "chestnut mountain",
         "tags": ["spending", "leisure"],
-        "pattern": "chestnut mountain"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "chicago architect",
         "tags": ["spending", "leisure"],
-        "pattern": "chicago architect"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "chicago park distr",
         "tags": ["spending", "leisure"],
-        "pattern": "chicago park distr"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "uber.*trip",
         "tags": ["spending", "leisure"],
-        "pattern": "uber.*trip"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "zelle.*to p",
         "tags": ["spending", "leisure"],
-        "pattern": "zelle.*to p"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "fedex office?",
         "tags": ["spending", "mystery"],
-        "pattern": "fedex office?"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "amazon web services",
         "tags": ["spending", "project"],
-        "pattern": "amazon web services"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "google.*(domains|services|cloud)",
         "tags": ["spending", "project"],
-        "pattern": "google.*(domains|services|cloud)"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "amazon\\.com\\*",
         "tags": ["spending", "shopping"],
-        "pattern": "amazon\\.com\\*"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "amzn mktp",
         "tags": ["spending", "shopping"],
-        "pattern": "amzn mktp"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "bestbuy",
         "tags": ["spending", "shopping"],
-        "pattern": "bestbuy"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "dba.*chip.*off",
         "tags": ["spending", "shopping"],
-        "pattern": "dba.*chip.*off"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "dbrand",
         "tags": ["spending", "shopping"],
-        "pattern": "dbrand"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "ebay",
         "tags": ["spending", "shopping"],
-        "pattern": "ebay"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "facebook",
         "tags": ["spending", "shopping"],
-        "pattern": "facebook"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "formd",
         "tags": ["spending", "shopping"],
-        "pattern": "formd"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "ikea.com",
         "tags": ["spending", "shopping"],
-        "pattern": "ikea.com"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "indiegogo",
         "tags": ["spending", "shopping"],
-        "pattern": "indiegogo"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "micro ?center",
         "tags": ["spending", "shopping"],
-        "pattern": "micro ?center"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "pocket-tripod-pro",
         "tags": ["spending", "shopping"],
-        "pattern": "pocket-tripod-pro"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "target",
         "tags": ["spending", "shopping"],
-        "pattern": "target"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "topo designs",
         "tags": ["spending", "shopping"],
-        "pattern": "topo designs"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "vans inc",
         "tags": ["spending", "shopping"],
-        "pattern": "vans inc"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "(mass)?drop(\\.com)?",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "(mass)?drop(\\.com)?"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "\\*3334186279",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "\\*3334186279"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "^computers$",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "^computers$"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "aliexpress",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "aliexpress"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "archetype",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "archetype"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "cephalopodc?",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "cephalopodc?"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "cftkb",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "cftkb"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "dixie mech",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "dixie mech"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "glorious pc",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "glorious pc"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "kebo\\.store",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "kebo\\.store"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "keyboard?",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "keyboard?"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "lillekrydde",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "lillekrydde"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "malvix",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "malvix"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "nice technologies",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "nice technologies"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "nicetechnol",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "nicetechnol"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "novelkeys",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "novelkeys"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "originative",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "originative"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "pikatea",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "pikatea"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "projectkb",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "projectkb"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "rama ?works",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "rama ?works"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "ringerkeys\\.com",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "ringerkeys\\.com"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "smpl supply",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "smpl supply"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "spacecables",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "spacecables"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "stupidfish",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "stupidfish"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "teal technik",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "teal technik"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "thekey\\.company",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "thekey\\.company"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "tonglingheh",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "tonglingheh"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "unicomp, inc.",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "unicomp, inc."
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "valvik",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "valvik"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "zap cables",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "zap cables"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "zeal generation",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "zeal generation"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "zhantu huang",
         "tags": ["spending", "shopping", "keyboard"],
-        "pattern": "zhantu huang"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "agilebits|1password",
         "tags": ["spending", "subscription"],
-        "pattern": "agilebits|1password"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "amazon prime",
         "tags": ["spending", "subscription"],
-        "pattern": "amazon prime"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "average tech revi(ews)?",
         "tags": ["spending", "subscription"],
-        "pattern": "average tech revi(ews)?"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "disney plus",
         "tags": ["spending", "subscription"],
-        "pattern": "disney plus"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "github",
         "tags": ["spending", "subscription"],
-        "pattern": "github"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "google storage?",
         "tags": ["spending", "subscription"],
-        "pattern": "google storage?"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "n(ew )?y(ork)? times",
         "tags": ["spending", "subscription"],
-        "pattern": "n(ew )?y(ork)? times"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "netflix\\.com",
         "tags": ["spending", "subscription"],
-        "pattern": "netflix\\.com"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "patreon",
         "tags": ["spending", "subscription"],
-        "pattern": "patreon"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "air canada",
         "tags": ["spending", "travel"],
-        "pattern": "air canada"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "bell mobility",
         "tags": ["spending", "utility"],
-        "pattern": "bell mobility"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "com(m )?ed",
         "tags": ["spending", "utility"],
-        "pattern": "com(m )?ed"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "google fi",
         "tags": ["spending", "utility"],
-        "pattern": "google fi"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "hair cuttery",
         "tags": ["spending", "utility"],
-        "pattern": "hair cuttery"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "midwest express clinic",
         "tags": ["spending", "utility"],
-        "pattern": "midwest express clinic"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "quest diagnostics",
         "tags": ["spending", "utility"],
-        "pattern": "quest diagnostics"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "state farm",
         "tags": ["spending", "utility"],
-        "pattern": "state farm"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "supercuts",
         "tags": ["spending", "utility"],
-        "pattern": "supercuts"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "the ups store",
         "tags": ["spending", "utility"],
-        "pattern": "the ups store"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "usps change of address?",
         "tags": ["spending", "utility"],
-        "pattern": "usps change of address?"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "usps po",
         "tags": ["spending", "utility"],
-        "pattern": "usps po"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "ventra",
         "tags": ["spending", "utility"],
-        "pattern": "ventra"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "ach interac w3",
         "tags": ["tax"],
-        "pattern": "ach interac w3"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "autosave",
         "tags": ["transfer"],
-        "pattern": "autosave"
+        "duplicateSensitivity": 0.0
     },
     {
+        "pattern": "payment (received|.*thank you|to.*card)",
         "tags": ["transfer"],
-        "pattern": "payment (received|.*thank you|to.*card)"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "vanguard.*edi pa?yme?nts",
         "tags": ["transfer"],
-        "pattern": "vanguard.*edi pa?yme?nts"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "virement w3",
         "tags": ["transfer"],
-        "pattern": "virement w3"
+        "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "webclient funds transfer",
         "tags": ["transfer"],
-        "pattern": "webclient funds transfer"
+        "duplicateSensitivity": 1.0
     }
 ]
