@@ -4,11 +4,9 @@ import {filter, sort, sum} from "./internal/transaction/query";
 import {printTransaction} from "./internal/transaction/transaction";
 import {slurp} from "./internal/slurp";
 
-// TODO
-// Deduplicate transactions in close time range and same absolute amount. (paypal)
-// Merge transactions from multiple sources (by similarity?).
-// Filter with OR/NOT/AND logic.
-// Toggleable verbose logs for ignored stuff and errors.
+// TODO query with OR/NOT/AND logic.
+// TODO cli.
+// TODO store converted format in file.
 
 const transactions = dedupe(
     tagTransactions("matchers.json", slurp("transactions")),

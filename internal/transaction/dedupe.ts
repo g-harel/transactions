@@ -92,17 +92,27 @@ const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
 
 // https://www.desmos.com/calculator/atfh1nekmi
 const rateQuad = (rating: number, max: number): number => {
-    if (rating < 0) return 0;
-    if (rating > max) return 1;
+    if (rating < 0) return 1;
+    if (rating > max) return 0;
     return 1 - (rating / max) ** 2;
 };
 const rateSin = (rating: number, max: number): number => {
-    if (rating < 0) return 0;
-    if (rating > max) return 1;
+    if (rating < 0) return 1;
+    if (rating > max) return 0;
     return 0.5 + 0.5 * Math.sin((rating / max) * Math.PI + 0.5 * Math.PI);
 };
 const rateExp = (rating: number, halfLife: number): number => {
     return 1 / (1 + rating / halfLife);
+};
+
+const weightedAvg = (entries: [number, number][]): number => {
+    let totalValues = 0;
+    let totalParts = 0;
+    for (const entry of entries) {
+        totalValues += entry[1] * entry[0];
+        totalParts += entry[0];
+    }
+    return totalValues / totalParts;
 };
 
 export const dedupe = (
@@ -118,30 +128,41 @@ export const dedupe = (
     }
 
     const result: MatchedTransaction[] = [];
-    for (const similarTransactions of Object.values(amountMap)) {
-        for (let i = 0; i < similarTransactions.length; i++) {
-            const current = similarTransactions[i];
+    for (const siblings of Object.values(amountMap)) {
+        for (let i = 0; i < siblings.length; i++) {
+            const current = siblings[i];
             if (!current.duplicateSensitivity) {
                 result.push(current);
                 continue;
             }
 
             let isDuplicate = false;
-            for (let j = i + 1; j < similarTransactions.length; j++) {
-                const compare = similarTransactions[j];
+            for (let j = i + 1; j < siblings.length; j++) {
+                const compare = siblings[j];
                 if (!compare.duplicateSensitivity) continue;
 
-                // Higher values mean higher chance of being different.
+                // Higher scores mean higher chance of being similar.
                 // Score should stay between 0 and 1 inclusive.
-                const descScore = 1 - descriptionSimilarity(current, compare);
-                const dateScore = rateSin(daysDifference(current, compare), 7);
-                const siblingScore = rateExp(similarTransactions.length - 1, 4);
-                const similarity = (descScore + dateScore + siblingScore) / 3;
 
-                // TODO use sensitivity + make sure scores are in same direction.
-                if (similarity < 0.3) {
+                const positionScore = weightedAvg([
+                    [3, rateSin(daysDifference(current, compare), 7)],
+                    [1, rateExp(siblings.length - 1, 2)],
+                ]);
+                if (positionScore < 0.8) {
+                    // Skip expensive description comparison when other factors
+                    // would overwhelm whatever result it could produce.
+                    continue;
+                }
+
+                const totalScore = weightedAvg([
+                    [3, descriptionSimilarity(current, compare)],
+                    [2, positionScore],
+                    [1, current.duplicateSensitivity],
+                    [1, compare.duplicateSensitivity],
+                ]);
+                if (totalScore > 0.8) {
                     logDebug(
-                        `Duplicate transaction (${similarity})`,
+                        `Duplicate transaction (${totalScore})`,
                         printMatchedTransaction(current),
                         printMatchedTransaction(compare),
                     );
