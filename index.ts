@@ -3,14 +3,12 @@ import {dedupe} from "./internal/transaction/dedupe";
 import {filter, sort, sum} from "./internal/transaction/query";
 import {printTransaction} from "./internal/transaction/transaction";
 import {slurp} from "./internal/slurp";
+import {argv} from "./internal/cli";
 
 // TODO query with OR/NOT/AND logic.
-// TODO cli.
 // TODO store converted format in file.
 
-const transactions = dedupe(
-    tagTransactions("matchers.json", slurp("transactions")),
-);
+const transactions = dedupe(tagTransactions(argv.matchfile, slurp(argv.dir)));
 
 if (false) {
     const tag = "food";

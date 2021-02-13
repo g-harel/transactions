@@ -1,11 +1,15 @@
 import chalk from "chalk";
 
+import {argv} from "./cli";
+
 interface LogFn {
     (message: string, ...artifacts: any[]): void;
 }
 
-const logFn = (label: string, c: chalk.Chalk): LogFn => {
+const logFn = (label: string, c: chalk.Chalk, verbose: boolean): LogFn => {
     return (message, ...artifacts) => {
+        if (verbose && !argv.verbose) return
+
         console.log(c(label), message);
 
         for (let i = 0; i < artifacts.length; i++) {
@@ -27,6 +31,6 @@ const logFn = (label: string, c: chalk.Chalk): LogFn => {
     };
 };
 
-export const logInfo = logFn("INFO", chalk.bold.green);
-export const logError = logFn("ERROR", chalk.bold.red);
-export const logDebug = logFn("DEBUG", chalk.bold.blue);
+export const logInfo = logFn("INFO", chalk.bold.green, false);
+export const logError = logFn("ERROR", chalk.bold.red, false);
+export const logDebug = logFn("DEBUG", chalk.bold.blue, true);
