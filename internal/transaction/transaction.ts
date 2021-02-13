@@ -13,8 +13,6 @@ export const printTransaction = (transaction: Transaction): string => {
     const date = transaction.date.toISOString().slice(0, 10);
     const amount = transaction.amount.toFixed(2);
     return `
-id         date        amount
-#${transaction.id}  ${date}  ${amount}
------------------------------
-${transaction.descriptions.join("\n")}`.trim();
+#${transaction.id} ${date} ${amount}
+${transaction.descriptions.join(" - ")}`.trim();
 };

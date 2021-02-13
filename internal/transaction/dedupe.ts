@@ -1,15 +1,6 @@
 import {logDebug} from "../log";
 import {MatchedTransaction, printMatchedTransaction} from "./tags";
-import {printTransaction, Transaction} from "./transaction";
-
-const isPayPal = (transaction: Transaction): boolean => {
-    for (const description of transaction.descriptions) {
-        if (description.toLowerCase().indexOf("paypal") >= 0) {
-            return true;
-        }
-    }
-    return false;
-};
+import {Transaction} from "./transaction";
 
 const daysDifference = (a: Transaction, b: Transaction): number => {
     const dayMs = 1000 * 60 * 60 * 24;
@@ -81,11 +72,6 @@ const descriptionSimilarity = (a: Transaction, b: Transaction): number => {
     similarities = similarities.sort().slice(-tokenCount);
 
     const similarity = similarities.reduce((acc, n) => acc + n, 0) / tokenCount;
-
-    // TODO Boost paypal similarity.
-    // if (isPayPal(a) || isPayPal(b)) {
-    //     return 1 - (1 - similarity) / Math.sqrt(2);
-    // }
 
     return similarity;
 };

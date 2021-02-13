@@ -10,9 +10,7 @@ interface Matcher {
 
 const printMatcher = (matcher: Matcher): string => {
     return `
-${matcher.pattern}
------------------------------
-[${matcher.tags.join(", ")}]`.trim();
+${matcher.pattern} [${matcher.tags.join(", ")}]`.trim();
 };
 
 export interface MatchedTransaction extends Transaction {
@@ -23,9 +21,10 @@ export interface MatchedTransaction extends Transaction {
 export const printMatchedTransaction = (
     transaction: MatchedTransaction,
 ): string => {
-    return `${printTransaction(transaction)}
------------------------------
-[${transaction.tags.join(", ")}]`.trim();
+    return printTransaction(transaction).replace(
+        "\n",
+        ` [${transaction.tags.join(", ")}]\n`,
+    );
 };
 
 const match = (matcher: Matcher, transaction: Transaction): boolean => {
