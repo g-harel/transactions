@@ -317,7 +317,7 @@
     {
         "pattern": "kinguin",
         "tags": ["spending", "games"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "mojang",
@@ -432,7 +432,7 @@
     {
         "pattern": "dba.*chip.*off",
         "tags": ["spending", "shopping"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "dbrand",
@@ -487,7 +487,7 @@
     {
         "pattern": "vans inc",
         "tags": ["spending", "shopping"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "(mass)?drop(\\.com)?",
@@ -497,7 +497,7 @@
     {
         "pattern": "\\*3334186279",
         "tags": ["spending", "shopping", "keyboard"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "^computers$",
@@ -512,12 +512,12 @@
     {
         "pattern": "archetype",
         "tags": ["spending", "shopping", "keyboard"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "cephalopodc?",
         "tags": ["spending", "shopping", "keyboard"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "cftkb",
@@ -545,24 +545,14 @@
         "duplicateSensitivity": 1.0
     },
     {
-        "pattern": "lillekrydde",
-        "tags": ["spending", "shopping", "keyboard"],
-        "duplicateSensitivity": 0.0
-    },
-    {
         "pattern": "malvix",
         "tags": ["spending", "shopping", "keyboard"],
         "duplicateSensitivity": 0.0
     },
     {
-        "pattern": "nice technologies",
+        "pattern": "nice ?technol(ogies)?",
         "tags": ["spending", "shopping", "keyboard"],
-        "duplicateSensitivity": 0.0
-    },
-    {
-        "pattern": "nicetechnol",
-        "tags": ["spending", "shopping", "keyboard"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "novelkeys",
@@ -587,7 +577,7 @@
     {
         "pattern": "rama ?works",
         "tags": ["spending", "shopping", "keyboard"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "ringerkeys\\.com",
@@ -622,7 +612,7 @@
     {
         "pattern": "tonglingheh",
         "tags": ["spending", "shopping", "keyboard"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "unicomp, inc.",
@@ -630,9 +620,9 @@
         "duplicateSensitivity": 0.0
     },
     {
-        "pattern": "valvik",
+        "pattern": "valvik|lillekrydde",
         "tags": ["spending", "shopping", "keyboard"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "zap cables",
@@ -647,7 +637,7 @@
     {
         "pattern": "zhantu huang",
         "tags": ["spending", "shopping", "keyboard"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "agilebits|1password",
@@ -662,7 +652,7 @@
     {
         "pattern": "average tech revi(ews)?",
         "tags": ["spending", "subscription"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "disney plus",
@@ -682,7 +672,7 @@
     {
         "pattern": "n(ew )?y(ork)? times",
         "tags": ["spending", "subscription"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "netflix\\.com",
