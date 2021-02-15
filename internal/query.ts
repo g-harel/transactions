@@ -1,4 +1,4 @@
-import {MatchedTransaction} from "./tags";
+import {MatchedTransaction} from "./match";
 import {Transaction} from "./transaction";
 
 export const filter = (

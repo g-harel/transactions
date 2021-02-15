@@ -1,7 +1,7 @@
-import {tagTransactions} from "./internal/transaction/tags";
-import {dedupe} from "./internal/transaction/dedupe";
-import {filter, sort, sum} from "./internal/transaction/query";
-import {printTransaction} from "./internal/transaction/transaction";
+import {tagTransactions} from "./internal/match";
+import {dedupe} from "./internal/uniq";
+import {filter, sort, sum} from "./internal/query";
+import {printTransaction} from "./internal/transaction";
 import {slurp} from "./internal/slurp";
 import {argv} from "./internal/cli";
 

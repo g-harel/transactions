@@ -1,5 +1,5 @@
-import {logDebug} from "../log";
-import {MatchedTransaction, printMatchedTransaction} from "./tags";
+import {logDebug} from "./log";
+import {MatchedTransaction, printMatchedTransaction} from "./match";
 import {Transaction} from "./transaction";
 
 const daysDifference = (a: Transaction, b: Transaction): number => {

@@ -2,7 +2,7 @@ import path from "path";
 
 import glob from "glob";
 
-import {Transaction} from "./transaction/transaction";
+import {Transaction} from "./transaction";
 import {readFile} from "./fs";
 import {logError, logInfo} from "./log";
 

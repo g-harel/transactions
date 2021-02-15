@@ -1,5 +1,5 @@
-import {readFile} from "../fs";
-import {logError} from "../log";
+import {readFile} from "./fs";
+import {logError} from "./log";
 import {printTransaction, Transaction} from "./transaction";
 
 interface Matcher {
