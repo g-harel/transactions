@@ -127,14 +127,27 @@ export const dedupe = (
                 const compare = siblings[j];
                 if (!compare.duplicateSensitivity) continue;
 
+                const start = 0;
+                const size = 1;
+                const range = [start, start + size];
+
                 // Higher scores mean higher chance of being similar.
                 // Score should stay between 0 and 1 inclusive.
 
                 const positionScore = weightedAvg([
-                    [3, rateSin(daysDifference(current, compare), 7)],
+                    [3, rateSin(daysDifference(current, compare), 9)],
                     [1, rateExp(siblings.length - 1, 2)],
                 ]);
-                if (positionScore < 0.8) {
+                if (positionScore < 0.5) {
+                    // if (positionScore >= range[0] && positionScore < range[1]) {
+                    //     if (current.amount !== -5.00 && current.amount !== -2.75 && current.amount !== -2.50) {
+                    //         logDebug(
+                    //             `positionScore (${positionScore})`,
+                    //             printMatchedTransaction(current),
+                    //             printMatchedTransaction(compare),
+                    //         );
+                    //     }
+                    // }
                     // Skip expensive description comparison when other factors
                     // would overwhelm whatever result it could produce.
                     continue;
@@ -146,12 +159,16 @@ export const dedupe = (
                     [1, current.duplicateSensitivity],
                     [1, compare.duplicateSensitivity],
                 ]);
-                if (totalScore > 0.8) {
+
+                if (totalScore >= range[0] && totalScore < range[1]) {
                     logDebug(
-                        `Duplicate transaction (${totalScore})`,
+                        `totalScore (${totalScore})`,
                         printMatchedTransaction(current),
                         printMatchedTransaction(compare),
                     );
+                }
+
+                if (totalScore > 0.8) {
                     isDuplicate = true;
                     break;
                 }
