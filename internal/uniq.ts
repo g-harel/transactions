@@ -117,7 +117,7 @@ export const dedupe = (
     for (const siblings of Object.values(amountMap)) {
         for (let i = 0; i < siblings.length; i++) {
             const current = siblings[i];
-            if (!current.duplicateSensitivity) {
+            if (!current.matcher.duplicateSensitivity) {
                 result.push(current);
                 continue;
             }
@@ -125,50 +125,33 @@ export const dedupe = (
             let isDuplicate = false;
             for (let j = i + 1; j < siblings.length; j++) {
                 const compare = siblings[j];
-                if (!compare.duplicateSensitivity) continue;
-
-                const start = 0;
-                const size = 1;
-                const range = [start, start + size];
+                if (!compare.matcher.duplicateSensitivity) continue;
 
                 // Higher scores mean higher chance of being similar.
                 // Score should stay between 0 and 1 inclusive.
 
-                const positionScore = weightedAvg([
+                const quickScore = weightedAvg([
                     [3, rateSin(daysDifference(current, compare), 9)],
+                    [3, current.matcher.id === compare.matcher.id ? 1 : 0],
+                    [2, current.matcher.duplicateSensitivity],
+                    [2, compare.matcher.duplicateSensitivity],
                     [1, rateExp(siblings.length - 1, 2)],
                 ]);
-                if (positionScore < 0.5) {
-                    // if (positionScore >= range[0] && positionScore < range[1]) {
-                    //     if (current.amount !== -5.00 && current.amount !== -2.75 && current.amount !== -2.50) {
-                    //         logDebug(
-                    //             `positionScore (${positionScore})`,
-                    //             printMatchedTransaction(current),
-                    //             printMatchedTransaction(compare),
-                    //         );
-                    //     }
-                    // }
-                    // Skip expensive description comparison when other factors
-                    // would overwhelm whatever result it could produce.
+                if (quickScore < 0.5) {
                     continue;
                 }
 
                 const totalScore = weightedAvg([
-                    [3, descriptionSimilarity(current, compare)],
-                    [2, positionScore],
-                    [1, current.duplicateSensitivity],
-                    [1, compare.duplicateSensitivity],
+                    [1, descriptionSimilarity(current, compare)],
+                    [2, quickScore],
                 ]);
 
-                if (totalScore >= range[0] && totalScore < range[1]) {
+                if (totalScore > 0.5) {
                     logDebug(
-                        `totalScore (${totalScore})`,
+                        `Duplicate transactions (${totalScore})`,
                         printMatchedTransaction(current),
                         printMatchedTransaction(compare),
                     );
-                }
-
-                if (totalScore > 0.8) {
                     isDuplicate = true;
                     break;
                 }

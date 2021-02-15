@@ -495,7 +495,7 @@
         "duplicateSensitivity": 0.0
     },
     {
-        "pattern": "\\*3334186279",
+        "pattern": "\\*3334186279|zhantu huang",
         "tags": ["spending", "shopping", "keyboard"],
         "duplicateSensitivity": 1.0
     },
@@ -633,11 +633,6 @@
         "pattern": "zeal generation",
         "tags": ["spending", "shopping", "keyboard"],
         "duplicateSensitivity": 0.0
-    },
-    {
-        "pattern": "zhantu huang",
-        "tags": ["spending", "shopping", "keyboard"],
-        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "agilebits|1password",

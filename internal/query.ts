@@ -7,7 +7,7 @@ export const filter = (
 ): MatchedTransaction[] => {
     return transactions.filter((transaction) => {
         for (const filterTag of tags) {
-            for (const transactionTag of transaction.tags) {
+            for (const transactionTag of transaction.matcher.tags) {
                 if (filterTag === transactionTag) return true;
             }
         }
@@ -17,7 +17,9 @@ export const filter = (
 export const untagged = (
     transactions: MatchedTransaction[],
 ): MatchedTransaction[] => {
-    return transactions.filter((transaction) => transaction.tags.length === 0);
+    return transactions.filter(
+        (transaction) => transaction.matcher.tags.length === 0,
+    );
 };
 
 export const sum = (transactions: Transaction[]): number => {

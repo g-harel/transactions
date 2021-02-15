@@ -8,7 +8,7 @@ interface LogFn {
 
 const logFn = (label: string, c: chalk.Chalk, verbose: boolean): LogFn => {
     return (message, ...artifacts) => {
-        if (verbose && !argv.verbose) return
+        if (verbose && !argv.verbose) return;
 
         console.log(c(label), message);
 

@@ -1,8 +1,10 @@
 import {readFile} from "./fs";
+import {genID} from "./id";
 import {logError} from "./log";
 import {printTransaction, Transaction} from "./transaction";
 
 interface Matcher {
+    id: string;
     pattern: RegExp;
     tags: string[];
     duplicateSensitivity?: number; // 0-1
@@ -10,12 +12,11 @@ interface Matcher {
 
 const printMatcher = (matcher: Matcher): string => {
     return `
-${matcher.pattern} [${matcher.tags.join(", ")}]`.trim();
+#${matcher.id} ${matcher.pattern} [${matcher.tags.join(", ")}]`.trim();
 };
 
 export interface MatchedTransaction extends Transaction {
-    tags: string[];
-    duplicateSensitivity?: number;
+    matcher: Matcher;
 }
 
 export const printMatchedTransaction = (
@@ -23,7 +24,7 @@ export const printMatchedTransaction = (
 ): string => {
     return printTransaction(transaction).replace(
         "\n",
-        ` [${transaction.tags.join(", ")}]\n`,
+        ` [${transaction.matcher.tags.join(", ")}]\n`,
     );
 };
 
@@ -39,6 +40,7 @@ export const tagTransactions = (
 ): MatchedTransaction[] => {
     const tagged: MatchedTransaction[] = [];
     const matchers: Matcher[] = JSON.parse(readFile(matchFile)).map((m) => {
+        m.id = genID();
         m.pattern = new RegExp(m.pattern, "i");
         return m;
     });
@@ -62,12 +64,7 @@ export const tagTransactions = (
             logError("Unmatched transaction.", printTransaction(transaction));
             continue;
         }
-        tagged.push(
-            Object.assign({}, transaction, {
-                tags: matched.tags,
-                duplicateSensitivity: matched.duplicateSensitivity,
-            }),
-        );
+        tagged.push(Object.assign({}, transaction, {matcher: matched}));
     }
 
     return tagged;
