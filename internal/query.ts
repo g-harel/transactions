@@ -60,7 +60,6 @@ export const tagTree = (transactions: MatchedTransaction[]): string => {
             }
         }
     }
-    logInfo("tagCombos", JSON.stringify(tagCombos, null, 2));
 
     const tags = Object.keys(tagCombos);
     const tagCount = tags.length;
@@ -68,8 +67,6 @@ export const tagTree = (transactions: MatchedTransaction[]): string => {
         .sort((a, b) => b[1] - a[1])
         .map(([tag, count]) => ({tag, count}));
 
-
-    logInfo("orderedTags", JSON.stringify(orderedTags, null, 2));
 
     interface TagTree {
         tag: string;
@@ -90,16 +87,74 @@ export const tagTree = (transactions: MatchedTransaction[]): string => {
         const {tag} = orderedTags[i];
         let found = false;
         for (const siblingTag of Object.keys(rootTag.children)) {
-            console.log(tag, siblingTag);
             if (tagCombos[tag][siblingTag]) {
                 found = true;
                 break;
             };
         }
-        if (found) break;
+        if (found) continue;
         rootTag.children[tag] = {tag, children: {}};
     }
-    console.log(rootTag);
 
-    return "";
+    logInfo("tagCombos", JSON.stringify(tagCombos, null, 2));
+    logInfo("orderedTags", orderedTags.map((o) => JSON.stringify(o)).join("\n"));
+    logInfo("rootTag", JSON.stringify(rootTag, null, 2));
+
+    const printTree = (tree: TagTree): string[] => {
+        const printed = [tree.tag];
+        const children = Object.values(tree.children);
+        for (let i = 0; i < children.length; i++) {
+            const printedChild = printTree(children[i]);
+            for (let j = 0; j < printedChild.length; j++) {
+                let prefix = "│ ";
+                if (i === children.length - 1) {
+                    prefix = "  "
+                }
+                if (j === 0) {
+                    if (i === children.length - 1) {
+                        prefix = "└─"
+                    } else {
+                        prefix = "├─"
+                    }
+                }
+                printed.push(prefix + printedChild[j]);
+            }
+        }
+        return printed;
+    }
+
+    console.log(printTree({
+        tag: "test",
+        children: {
+            test: {
+                tag: "test",
+                children: {
+                    test: {
+                        tag: "test",
+                        children: {
+                            test: {
+                                tag: "test",
+                                children: {},
+                            },
+                            test2: {
+                                tag: "test",
+                                children: {},
+                            },
+                        },
+                    },
+                },
+            },
+            test2: {
+                tag: "test",
+                children: {
+                    test: {
+                        tag: "test",
+                        children: {},
+                    },
+                },
+            },
+        }
+    }).join("\n"));
+
+    return printTree(rootTag).join("\n");
 };
