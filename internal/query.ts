@@ -61,46 +61,47 @@ export const tagTree = (transactions: MatchedTransaction[]): string => {
         }
     }
 
-    const tags = Object.keys(tagCombos);
-    const tagCount = tags.length;
-    const orderedTags = Object.entries(tagComboFrequency)
-        .sort((a, b) => b[1] - a[1])
-        .map(([tag, count]) => ({tag, count}));
-
-
-    interface TagTree {
+    interface TagNode {
         tag: string;
-        children: Record<string, TagTree>;
+        children: TagNode[];
     }
 
-    const rootTag: TagTree = {
-        tag: "root",
-        children: {
-            [orderedTags[0].tag]: {
-                tag: orderedTags[0].tag,
-                children: {},
-            },
-        },
-    };
-    // TODO make recursive.
-    for (let i = 0; i < tagCount; i++) {
-        const {tag} = orderedTags[i];
-        let found = false;
-        for (const siblingTag of Object.keys(rootTag.children)) {
-            if (tagCombos[tag][siblingTag]) {
-                found = true;
-                break;
-            };
+    const buildTree = (sortedTags: string[]): TagNode[] => {
+        if (sortedTags.length === 0) return [];
+
+        const layer = [];
+        const remainingTags = sortedTags.slice();
+
+        // Add all tags that never appear with others in the layer.
+        // Tags in this layer are removed from the list of remaining ones.
+        for (let i = 0; i < sortedTags.length; i++) {
+            let found = false;
+            for (const layerSibling of layer) {
+                if (tagCombos[sortedTags[i]][layerSibling]) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                layer.push(sortedTags[i]);
+                remainingTags.splice(i, 0);
+            }
         }
-        if (found) continue;
-        rootTag.children[tag] = {tag, children: {}};
-    }
 
-    logInfo("tagCombos", JSON.stringify(tagCombos, null, 2));
-    logInfo("orderedTags", orderedTags.map((o) => JSON.stringify(o)).join("\n"));
-    logInfo("rootTag", JSON.stringify(rootTag, null, 2));
+        // Recur over remaining tags, but only those that have been seen to be
+        // combined with the individual layer tag.
+        return layer.map((layerTag) => {
+            const remainingCombos = remainingTags.filter((tag) => {
+                return tagCombos[layerTag][tag];
+            });
+            return {
+                tag: layerTag,
+                children: buildTree(remainingCombos),
+            };
+        });
+    };
 
-    const printTree = (tree: TagTree): string[] => {
+    const printTree = (tree: TagNode): string[] => {
         const printed = [tree.tag];
         const children = Object.values(tree.children);
         for (let i = 0; i < children.length; i++) {
@@ -108,53 +109,26 @@ export const tagTree = (transactions: MatchedTransaction[]): string => {
             for (let j = 0; j < printedChild.length; j++) {
                 let prefix = "│ ";
                 if (i === children.length - 1) {
-                    prefix = "  "
+                    prefix = "  ";
                 }
                 if (j === 0) {
                     if (i === children.length - 1) {
-                        prefix = "└─"
+                        prefix = "└─";
                     } else {
-                        prefix = "├─"
+                        prefix = "├─";
                     }
                 }
                 printed.push(prefix + printedChild[j]);
             }
         }
         return printed;
-    }
+    };
 
-    console.log(printTree({
-        tag: "test",
-        children: {
-            test: {
-                tag: "test",
-                children: {
-                    test: {
-                        tag: "test",
-                        children: {
-                            test: {
-                                tag: "test",
-                                children: {},
-                            },
-                            test2: {
-                                tag: "test",
-                                children: {},
-                            },
-                        },
-                    },
-                },
-            },
-            test2: {
-                tag: "test",
-                children: {
-                    test: {
-                        tag: "test",
-                        children: {},
-                    },
-                },
-            },
-        }
-    }).join("\n"));
-
-    return printTree(rootTag).join("\n");
+    const allSortedTags = Object.entries(tagComboFrequency)
+        .sort((a, b) => b[1] - a[1])
+        .map(([tag]) => tag);
+    return printTree({
+        tag: "*",
+        children: buildTree(allSortedTags),
+    }).join("\n");
 };

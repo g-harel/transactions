@@ -195,7 +195,7 @@
         "duplicateSensitivity": 0.0
     },
     {
-        "pattern": "h mart",
+        "pattern": "h ?mart",
         "tags": ["spending", "food"],
         "duplicateSensitivity": 0.0
     },

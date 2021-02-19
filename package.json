@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "start": "ts-node -O '{\"esModuleInterop\": true}' index.ts",
+        "start": "ts-node -O '{\"esModuleInterop\": true, \"lib\": [\"es2019\"]}' index.ts",
         "fmt": "prettier --list-different --write --ignore-path .gitignore '**/*.{js,ts,md,html,json}'"
     },
     "dependencies": {
