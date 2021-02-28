@@ -1,14 +1,14 @@
 import chalk from "chalk";
 
-import {argv} from "./cli";
+import {verbose} from "./cli";
 
 interface LogFn {
     (message: string, ...artifacts: any[]): void;
 }
 
-const logFn = (label: string, c: chalk.Chalk, verbose: boolean): LogFn => {
+const logFn = (label: string, c: chalk.Chalk, isVerbose: boolean): LogFn => {
     return (message, ...artifacts) => {
-        if (verbose && !argv.verbose) return;
+        if (isVerbose && !verbose) return;
 
         console.log(c(label), message);
 
