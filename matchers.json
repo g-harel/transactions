@@ -125,6 +125,11 @@
         "duplicateSensitivity": 0.0
     },
     {
+        "pattern": "budlong",
+        "tags": ["spending", "food"],
+        "duplicateSensitivity": 0.0
+    },
+    {
         "pattern": "burger king",
         "tags": ["spending", "food"],
         "duplicateSensitivity": 0.0
@@ -515,12 +520,22 @@
         "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "boardsource",
+        "tags": ["spending", "shopping", "keyboard"],
+        "duplicateSensitivity": 0.0
+    },
+    {
         "pattern": "cephalopodc?",
         "tags": ["spending", "shopping", "keyboard"],
         "duplicateSensitivity": 1.0
     },
     {
         "pattern": "cftkb",
+        "tags": ["spending", "shopping", "keyboard"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "digi ?key",
         "tags": ["spending", "shopping", "keyboard"],
         "duplicateSensitivity": 0.0
     },
@@ -545,7 +560,17 @@
         "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "kwei ?running",
+        "tags": ["spending", "shopping", "keyboard"],
+        "duplicateSensitivity": 1.0
+    },
+    {
         "pattern": "malvix",
+        "tags": ["spending", "shopping", "keyboard"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "mkultra",
         "tags": ["spending", "shopping", "keyboard"],
         "duplicateSensitivity": 0.0
     },
@@ -625,6 +650,11 @@
         "duplicateSensitivity": 1.0
     },
     {
+        "pattern": "work louder",
+        "tags": ["spending", "shopping", "keyboard"],
+        "duplicateSensitivity": 0.0
+    },
+    {
         "pattern": "zap cables",
         "tags": ["spending", "shopping", "keyboard"],
         "duplicateSensitivity": 1.0
@@ -661,6 +691,11 @@
     },
     {
         "pattern": "google storage?",
+        "tags": ["spending", "subscription"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "hulu",
         "tags": ["spending", "subscription"],
         "duplicateSensitivity": 0.0
     },
@@ -755,7 +790,7 @@
         "duplicateSensitivity": 0.0
     },
     {
-        "pattern": "payment (received|.*thank you|to.*card)",
+        "pattern": "payment[ -]+(received|thank you|to.*card)",
         "tags": ["transfer"],
         "duplicateSensitivity": 0.0
     },

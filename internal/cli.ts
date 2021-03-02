@@ -45,6 +45,14 @@ const argv = yargs(hideBin(process.argv))
         },
     )
     .command(
+        "read",
+        "Read all transactions and exit",
+        () => {},
+        (argv) => {
+            dedupe(tagTransactions(argv.matchfile, slurp(argv.dir)));
+        },
+    )
+    .command(
         "total",
         "Calculate transactions total by tag",
         (yargs) => {
