@@ -522,7 +522,7 @@
     {
         "pattern": "boardsource",
         "tags": ["spending", "shopping", "keyboard"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "cephalopodc?",

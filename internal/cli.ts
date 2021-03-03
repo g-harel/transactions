@@ -1,8 +1,9 @@
 import {hideBin} from "yargs/helpers";
 import yargs from "yargs/yargs";
+import {fNumber, fTransactionLine} from "./format";
 import {logInfo} from "./log";
-import {printMatchedTransaction, tagTransactions} from "./match";
-import {filter, sum, tagTree} from "./query";
+import {tagTransactions} from "./match";
+import {filter, sum, sort, tagTree} from "./query";
 import {slurp} from "./slurp";
 import {dedupe} from "./uniq";
 
@@ -64,13 +65,18 @@ const argv = yargs(hideBin(process.argv))
             });
         },
         (argv) => {
-            const transactions = filter(
-                dedupe(tagTransactions(argv.matchfile, slurp(argv.dir))),
-                [(argv as any).tag],
+            const transactions = sort(
+                filter(
+                    dedupe(tagTransactions(argv.matchfile, slurp(argv.dir))),
+                    [(argv as any).tag],
+                ),
             );
 
-            logInfo("transactions", transactions.map(printMatchedTransaction));
-            logInfo("total", sum(transactions));
+            logInfo(
+                "transactions",
+                transactions.map(fTransactionLine).join("\n"),
+            );
+            logInfo("total", fNumber(sum(transactions)));
         },
     ).argv;
 

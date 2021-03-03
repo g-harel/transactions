@@ -1,5 +1,6 @@
+import {fTransaction} from "./format";
 import {logDebug} from "./log";
-import {MatchedTransaction, printMatchedTransaction} from "./match";
+import {MatchedTransaction} from "./match";
 import {Transaction} from "./transaction";
 
 const daysDifference = (a: Transaction, b: Transaction): number => {
@@ -149,8 +150,8 @@ export const dedupe = (
                 if (totalScore > 0.5) {
                     logDebug(
                         `Duplicate transactions (${totalScore})`,
-                        printMatchedTransaction(current),
-                        printMatchedTransaction(compare),
+                        fTransaction(current),
+                        fTransaction(compare),
                     );
                     isDuplicate = true;
                     break;

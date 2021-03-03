@@ -1,7 +1,8 @@
+import {fTransaction} from "./format";
 import {readFile} from "./fs";
 import {genID} from "./id";
 import {logError} from "./log";
-import {printTransaction, Transaction} from "./transaction";
+import {Transaction} from "./transaction";
 
 interface Matcher {
     id: string;
@@ -18,15 +19,6 @@ const printMatcher = (matcher: Matcher): string => {
 export interface MatchedTransaction extends Transaction {
     matcher: Matcher;
 }
-
-export const printMatchedTransaction = (
-    transaction: MatchedTransaction,
-): string => {
-    return printTransaction(transaction).replace(
-        "\n",
-        ` [${transaction.matcher.tags.join(", ")}]\n`,
-    );
-};
 
 const match = (matcher: Matcher, transaction: Transaction): boolean => {
     for (const description of transaction.descriptions) {
@@ -52,7 +44,7 @@ export const tagTransactions = (
                 if (matched !== null) {
                     logError(
                         "Ambiguous transaction match.",
-                        printTransaction(transaction),
+                        fTransaction(transaction),
                         printMatcher(matched),
                         printMatcher(matcher),
                     );
@@ -61,7 +53,7 @@ export const tagTransactions = (
             }
         }
         if (matched === null) {
-            logError("Unmatched transaction.", printTransaction(transaction));
+            logError("Unmatched transaction.", fTransaction(transaction));
             continue;
         }
         tagged.push(Object.assign({}, transaction, {matcher: matched}));
