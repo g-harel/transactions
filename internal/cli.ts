@@ -5,13 +5,14 @@ import {logInfo} from "./log";
 import {tagTransactions} from "./match";
 import {filter, sum, sort, tagTree} from "./query";
 import {slurp} from "./slurp";
+import {init, query, write} from "./sqlite";
 import {dedupe} from "./uniq";
 
 // TODO query with OR/NOT/AND logic.
 // TODO store converted format in file.
 // TODO add commands to cli
 
-const argv = yargs(hideBin(process.argv))
+yargs(hideBin(process.argv))
     .showHelpOnFail(true)
     .demandCommand()
     .recommendCommands()
@@ -54,6 +55,24 @@ const argv = yargs(hideBin(process.argv))
         },
     )
     .command(
+        "query [sql]",
+        "Query transactions",
+        (yargs) => {
+            yargs.positional("sql", {
+                describe: "SQL query. Use TODO to inspect schema",
+                demandOption: true,
+            });
+        },
+        (argv) => {
+            const transactions = dedupe(
+                tagTransactions(argv.matchfile, slurp(argv.dir)),
+            );
+            init();
+            write(transactions);
+            query((argv as any).sql);
+        },
+    )
+    .command(
         "total",
         "Calculate transactions total by tag",
         (yargs) => {
@@ -79,5 +98,3 @@ const argv = yargs(hideBin(process.argv))
             logInfo("total", fNumber(sum(transactions)));
         },
     ).argv;
-
-export const verbose = argv.verbose;

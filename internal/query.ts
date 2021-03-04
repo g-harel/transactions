@@ -1,4 +1,3 @@
-import {logInfo} from "./log";
 import {MatchedTransaction} from "./match";
 import {Transaction} from "./transaction";
 
