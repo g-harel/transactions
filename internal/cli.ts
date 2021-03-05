@@ -11,12 +11,20 @@ import {dedupe} from "./uniq";
 // TODO query with OR/NOT/AND logic.
 // TODO store converted format in file.
 // TODO add commands to cli
+// TODO duplicate debug command
+// TODO admin command namespace
+
+export const verboseFlag = () => !!(global as any).yargv.verbose;
 
 yargs(hideBin(process.argv))
     .showHelpOnFail(true)
     .demandCommand()
     .recommendCommands()
     .strict()
+    .middleware((argv) => {
+        // Make flags available globally once they're known.
+        (global as any).yargv = argv;
+    })
     .option("verbose", {
         alias: "v",
         type: "boolean",

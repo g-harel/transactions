@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import {verboseFlag} from "./cli";
 
 interface LogFn {
     (message: string, ...artifacts: any[]): void;
@@ -6,8 +7,7 @@ interface LogFn {
 
 const logFn = (label: string, c: chalk.Chalk, isVerbose: boolean): LogFn => {
     return (message, ...artifacts) => {
-        // TODO verbose not working.
-        if (isVerbose) return;
+        if (isVerbose && !verboseFlag()) return;
 
         console.log(c(label), message);
 

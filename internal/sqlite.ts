@@ -1,6 +1,6 @@
 import sqlite3 from "sqlite3";
 import {fDate} from "./format";
-import {logInfo, logError} from "./log";
+import {logDebug, logError} from "./log";
 import {MatchedTransaction} from "./match";
 
 let db: sqlite3.Database;
@@ -11,7 +11,7 @@ const statementCallback = (err, result) => {
         return;
     }
     if (result != null) {
-        logInfo("Result", result);
+        logDebug("Result", result);
     }
 };
 
@@ -25,7 +25,7 @@ export const init = () => {
     amount      REAL,
     tags        TEXT
 )`;
-        logInfo("sqlite3", sql);
+        logDebug("sqlite3", sql);
         db.run(sql, statementCallback);
     });
 };
@@ -56,7 +56,7 @@ export const query = (sql: string): MatchedTransaction[] => {
         logError("Database not initialized.");
         return [];
     }
-    logInfo("sqlite3", sql);
+    logDebug("sqlite3", sql);
     db.all(sql, (err, rows) => {
         if (err != null) {
             logError("Database error", err);
