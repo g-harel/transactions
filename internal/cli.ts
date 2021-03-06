@@ -1,9 +1,9 @@
 import {hideBin} from "yargs/helpers";
 import yargs from "yargs/yargs";
-import {fNumber, fTransactionLine} from "./format";
+import {fTransactionLine} from "./format";
 import {logInfo} from "./log";
 import {tagTransactions} from "./match";
-import {filter, sum, sort, tagTree} from "./query";
+import {tagTree} from "./query";
 import {slurp} from "./slurp";
 import {init, query, write} from "./sqlite";
 import {dedupe} from "./uniq";
@@ -17,7 +17,6 @@ import {dedupe} from "./uniq";
 export const verboseFlag = () => !!(global as any).yargv.verbose;
 
 yargs(hideBin(process.argv))
-    .showHelpOnFail(true)
     .demandCommand()
     .recommendCommands()
     .strict()
@@ -71,38 +70,20 @@ yargs(hideBin(process.argv))
                 demandOption: true,
             });
         },
-        (argv) => {
+        // TODO add total flag to also print total
+        async (argv) => {
             const transactions = dedupe(
                 tagTransactions(argv.matchfile, slurp(argv.dir)),
             );
-            init();
-            write(transactions);
-            query((argv as any).sql);
-        },
-    )
-    .command(
-        "total",
-        "Calculate transactions total by tag",
-        (yargs) => {
-            yargs.option("tag", {
-                alias: "t",
-                type: "string",
-                description: "Tag to query",
-                demandOption: true,
-            });
-        },
-        (argv) => {
-            const transactions = sort(
-                filter(
-                    dedupe(tagTransactions(argv.matchfile, slurp(argv.dir))),
-                    [(argv as any).tag],
-                ),
-            );
+            await init();
+            await write(transactions);
 
-            logInfo(
-                "transactions",
-                transactions.map(fTransactionLine).join("\n"),
-            );
-            logInfo("total", fNumber(sum(transactions)));
+            const result = await query((argv as any).sql);
+            if (result.length > 0) {
+                logInfo(
+                    "transactions",
+                    result.map(fTransactionLine).join("\n"),
+                );
+            }
         },
     ).argv;

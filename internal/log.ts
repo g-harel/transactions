@@ -12,7 +12,16 @@ const logFn = (label: string, c: chalk.Chalk, isVerbose: boolean): LogFn => {
         console.log(c(label), message);
 
         for (let i = 0; i < artifacts.length; i++) {
-            const lines = String(artifacts[i]).split("\n");
+            const artifact = artifacts[i];
+
+            let printed = String(artifact);
+            if (typeof artifact === "object") {
+                try {
+                    printed = JSON.stringify(artifact, null, 2);
+                } catch {}
+            }
+
+            const lines = printed.split("\n");
             for (let j = 0; j < lines.length; j++) {
                 console.log(c("│"), chalk.grey(lines[j]));
 

@@ -5,7 +5,7 @@ import {Transaction} from "./transaction";
 
 const daysDifference = (a: Transaction, b: Transaction): number => {
     const dayMs = 1000 * 60 * 60 * 24;
-    return Math.abs(a.date.getTime() - b.date.getTime()) / dayMs;
+    return Math.abs(Date.parse(a.date) - Date.parse(b.date)) / dayMs;
 };
 
 const descriptionTokens = (transaction: Transaction): string[] => {

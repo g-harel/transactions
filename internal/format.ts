@@ -6,6 +6,7 @@ export const fNumber = (n: number): string => {
 };
 
 export const fDate = (d: Date): string => {
+    if (isNaN(d as any)) {return ""}
     return d.toISOString().slice(0, 10);
 };
 
@@ -17,7 +18,7 @@ export const fTransaction = (
     transaction: Transaction | MatchedTransaction,
 ): string => {
     return `
-#${transaction.id} ${fDate(transaction.date)} ${fNumber(transaction.amount)}
+#${transaction.id} ${transaction.date} ${fNumber(transaction.amount)}
 ${transaction.descriptions.join(" - ")}`.trim();
 };
 
@@ -28,7 +29,7 @@ export const fTransactionLine = (
         ? fTags((transaction as any).matcher.tags)
         : "";
     return [
-        fDate(transaction.date),
+        transaction.date,
         fNumber(transaction.amount),
         transaction.descriptions.join(" - "),
         tags,

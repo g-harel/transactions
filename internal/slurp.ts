@@ -6,6 +6,7 @@ import {Transaction} from "./transaction";
 import {readFile} from "./fs";
 import {logError, logInfo} from "./log";
 import {genID} from "./id";
+import {fDate} from "./format";
 
 const readLines = (fileName: string): string[] => {
     return readFile(fileName).split("\n");
@@ -25,7 +26,7 @@ export const slurpMint = (fileName: string): Transaction[] => {
         const isDebit = line[4].toLowerCase() === "debit";
         const transaction = {
             id: genID(),
-            date: new Date(Date.parse(line[0])),
+            date: fDate(new Date(Date.parse(line[0]))),
             descriptions: [line[1], line[2]],
             amount: Number(line[3]) * (isDebit ? -1 : 1),
             tags: [],

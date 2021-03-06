@@ -30,7 +30,7 @@ export const sum = (transactions: Transaction[]): number => {
 };
 
 export const sort = <T extends Transaction>(transactions: T[]): T[] => {
-    return transactions.sort((a, b) => a.date.getTime() - b.date.getTime());
+    return transactions.sort((a, b) => a.date.localeCompare(b.date));
 };
 
 export const tagTree = (transactions: MatchedTransaction[]): string => {
