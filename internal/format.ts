@@ -6,7 +6,9 @@ export const fNumber = (n: number): string => {
 };
 
 export const fDate = (d: Date): string => {
-    if (isNaN(d as any)) {return ""}
+    if (isNaN(d as any)) {
+        return "";
+    }
     return d.toISOString().slice(0, 10);
 };
 
@@ -45,4 +47,17 @@ export const fMatchedTransaction = (
         "\n",
         ` [${transaction.matcher.tags.join(", ")}]\n`,
     );
+};
+
+export const fQuery = (q: string) => {
+    const lines = q.split("\n");
+    let min = Infinity;
+    for (const line of lines) {
+        if (line === "") continue;
+        min = Math.min(min, line.length - line.trimStart().length);
+    }
+    return lines
+        .filter((line) => line.trim() !== "")
+        .map((line) => line.substr(min))
+        .join("\n");
 };

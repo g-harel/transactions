@@ -1,10 +1,9 @@
 import sqlite3 from "sqlite3";
+import {fQuery} from "./format";
 import {logDebug, logError} from "./log";
 import {MatchedTransaction} from "./match";
 
 let db: sqlite3.Database;
-
-// TODO format queries to remove leading whitespace
 
 const logErr = (err: Error) => {
     if (err) logError("Database error", String(err));
@@ -37,15 +36,16 @@ export const init = async () => {
     });
     await createDatabase.wait;
 
-    const sql = `CREATE TABLE transactions (
-    id          TEXT,
-    date        TEXT,
-    description TEXT,
-    amount      REAL,
-    tags        TEXT,
-    _original   TEXT
-)`;
-    logDebug("sqlite3", sql);
+    const sql = `
+        CREATE TABLE transactions (
+            id          TEXT,
+            date        TEXT,
+            description TEXT,
+            amount      REAL,
+            tags        TEXT,
+            _original   TEXT
+        )`;
+    logDebug("sqlite3", fQuery(sql));
 
     const createTable = sync();
     db.run(sql, (_, err: Error) => {
@@ -82,11 +82,10 @@ export const write = async (transactions: MatchedTransaction[]) => {
     );
 };
 
-// TODO catch errors.
 export const query = async (sql: string): Promise<MatchedTransaction[]> => {
     if (checkInit()) return [];
 
-    logDebug("sqlite3", sql);
+    logDebug("sqlite3", fQuery(sql));
 
     let rows: any[] = [];
     const runQuery = sync();
