@@ -62,21 +62,29 @@ export const write = async (transactions: MatchedTransaction[]) => {
 
     await Promise.all(
         transactions.map(async (transaction) => {
-            // TODO use parameters instead.
-            const sql = `INSERT INTO transactions VALUES (
-    '${transaction.id}',
-    '${transaction.date}',
-    '${transaction.descriptions.join(", ")}',
-    ${transaction.amount},
-    '${transaction.matcher.tags.join(", ")}',
-    '${JSON.stringify(transaction)}'
-)`;
-
-            const insertTransaction = sync();
-            db.run(sql, (_, err: Error) => {
+            const prepareStatement = sync();
+            const statement = db.prepare(`INSERT INTO transactions VALUES (
+                $id, $date, $description, $amount, $tags, $_original
+            )`, (_, err) => {
                 logErr(err);
-                insertTransaction.done();
+                prepareStatement.done();
             });
+            await prepareStatement.wait;
+            const insertTransaction = sync();
+            statement.run(
+                {
+                    $id: transaction.id,
+                    $date: transaction.date,
+                    $description: transaction.descriptions.join(", "),
+                    $amount: transaction.amount,
+                    $tags: transaction.matcher.tags.join(", "),
+                    $_original: JSON.stringify(transaction),
+                },
+                (_, err: Error) => {
+                    logErr(err);
+                    insertTransaction.done();
+                },
+            );
             await insertTransaction.wait;
         }),
     );
