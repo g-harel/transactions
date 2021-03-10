@@ -1,9 +1,9 @@
 import {hideBin} from "yargs/helpers";
 import yargs from "yargs/yargs";
-import {fTransactionLine} from "./format";
+import {fNumber, fTransactionLine} from "./format";
 import {logInfo} from "./log";
 import {tagTransactions} from "./match";
-import {tagTree} from "./query";
+import {sum, tagTree} from "./query";
 import {slurp} from "./slurp";
 import {init, query, write} from "./sqlite";
 import {dedupe} from "./uniq";
@@ -68,9 +68,13 @@ yargs(hideBin(process.argv))
             yargs.positional("sql", {
                 describe: "SQL query. Use TODO to inspect schema",
                 demandOption: true,
+            })
+            .option("total", {
+                type: "boolean",
+                description: "Also print total of queried transactions.",
             });
         },
-        // TODO add total flag to also print total
+        // TODO print different when not transactions returned.
         async (argv) => {
             const transactions = dedupe(
                 tagTransactions(argv.matchfile, slurp(argv.dir)),
@@ -78,12 +82,17 @@ yargs(hideBin(process.argv))
             await init();
             await write(transactions);
 
-            const result = await query((argv as any).sql);
-            if (result.length > 0) {
+            const results = await query((argv as any).sql);
+            if (results.length > 0) {
                 logInfo(
                     "transactions",
-                    result.map(fTransactionLine).join("\n"),
+                    results.map(fTransactionLine).join("\n"),
                 );
+                if ((argv as any).total) {
+                    logInfo("total", fNumber(sum(results)));
+                }
+            } else {
+                logInfo("Query produced no results.")
             }
         },
     ).argv;
