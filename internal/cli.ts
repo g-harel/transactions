@@ -8,11 +8,7 @@ import {slurp} from "./slurp";
 import {init, query, write} from "./sqlite";
 import {dedupe} from "./uniq";
 
-// TODO query with OR/NOT/AND logic.
-// TODO store converted format in file.
-// TODO add commands to cli
 // TODO duplicate debug command
-// TODO admin command namespace
 
 export const verboseFlag = () => !!(global as any).yargv.verbose;
 
@@ -25,56 +21,55 @@ yargs(hideBin(process.argv))
         (global as any).yargv = argv;
     })
     .option("verbose", {
-        alias: "v",
         type: "boolean",
-        description: "Run with verbose logging",
+        description: "Run with verbose logging.",
     })
     .option("dir", {
-        alias: "d",
         type: "string",
-        description: "Specify transaction source",
+        default: "transactions",
+        description: "Specify transaction source.",
         demandOption: true,
     })
     .option("matchfile", {
-        alias: "m",
         type: "string",
-        description: "Specify matchfile",
+        default: "matchfile.json",
+        description: "Specify matchfile.",
         demandOption: true,
     })
     .command(
-        "tag-tree",
-        "Print the calculated tag tree",
-        () => {},
+        "inspect",
+        "Inspect transactions.",
+        (yargs) => {
+            yargs.option("tags", {
+                type: "boolean",
+                description: "Print the calculated tag tree",
+            });
+        },
         (argv) => {
             const transactions = tagTransactions(
                 argv.matchfile,
                 slurp(argv.dir),
             );
-            logInfo("tags", tagTree(transactions));
-        },
-    )
-    .command(
-        "read",
-        "Read all transactions and exit",
-        () => {},
-        (argv) => {
-            dedupe(tagTransactions(argv.matchfile, slurp(argv.dir)));
+            if ((argv as any).tags) {
+                logInfo("tags", tagTree(transactions));
+            }
+            logInfo("No errors.");
         },
     )
     .command(
         "query [sql]",
-        "Query transactions",
+        "Query transactions.",
         (yargs) => {
-            yargs.positional("sql", {
-                describe: "SQL query. Use TODO to inspect schema",
-                demandOption: true,
-            })
-            .option("total", {
-                type: "boolean",
-                description: "Also print total of queried transactions.",
-            });
+            yargs
+                .positional("sql", {
+                    describe: "SQL query.",
+                    demandOption: true,
+                })
+                .option("total", {
+                    type: "boolean",
+                    description: "Print total of queried transactions.",
+                });
         },
-        // TODO print different when not transactions returned.
         async (argv) => {
             const transactions = dedupe(
                 tagTransactions(argv.matchfile, slurp(argv.dir)),
@@ -92,7 +87,7 @@ yargs(hideBin(process.argv))
                     logInfo("total", fNumber(sum(results)));
                 }
             } else {
-                logInfo("Query produced no results.")
+                logInfo("Query produced no transactions.");
             }
         },
     ).argv;

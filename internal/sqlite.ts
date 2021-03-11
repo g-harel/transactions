@@ -63,12 +63,15 @@ export const write = async (transactions: MatchedTransaction[]) => {
     await Promise.all(
         transactions.map(async (transaction) => {
             const prepareStatement = sync();
-            const statement = db.prepare(`INSERT INTO transactions VALUES (
-                $id, $date, $description, $amount, $tags, $_original
-            )`, (_, err) => {
-                logErr(err);
-                prepareStatement.done();
-            });
+            const statement = db.prepare(
+                `INSERT INTO transactions VALUES (
+                    $id, $date, $description, $amount, $tags, $_original
+                )`,
+                (_, err) => {
+                    logErr(err);
+                    prepareStatement.done();
+                },
+            );
             await prepareStatement.wait;
             const insertTransaction = sync();
             statement.run(
@@ -106,8 +109,8 @@ export const query = async (sql: string): Promise<MatchedTransaction[]> => {
 
     try {
         return rows.map((row) => JSON.parse(row._original));
-    } catch {
-        logError("Unexpected query result", rows);
+    } catch (err) {
+        logError("Unexpected query result", err, rows);
         return [];
     }
 };
