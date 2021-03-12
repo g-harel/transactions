@@ -1,14 +1,12 @@
 import {hideBin} from "yargs/helpers";
 import yargs from "yargs/yargs";
-import {fNumber, fTransactionLine} from "./format";
+import {fDate, fNumber, fTransactionLine} from "./format";
 import {logInfo} from "./log";
 import {tagTransactions} from "./match";
 import {sum, tagTree} from "./query";
 import {slurp} from "./slurp";
 import {init, query, write} from "./sqlite";
 import {dedupe} from "./uniq";
-
-// TODO duplicate debug command
 
 export const verboseFlag = () => !!(global as any).yargv.verbose;
 
@@ -40,16 +38,40 @@ yargs(hideBin(process.argv))
         "inspect",
         "Inspect transactions.",
         (yargs) => {
-            yargs.option("tags", {
-                type: "boolean",
-                description: "Print the calculated tag tree",
-            });
+            yargs
+                .option("tags", {
+                    type: "boolean",
+                    description: "Print the calculated tag tree.",
+                })
+                .option("dedupe", {
+                    type: "number",
+                    description:
+                        "Dedupe transactions going back N days. Use -1 to dedupe all transactions.",
+                });
         },
         (argv) => {
             const transactions = tagTransactions(
                 argv.matchfile,
                 slurp(argv.dir),
             );
+            const dedupeDays: number = (argv as any).dedupe;
+            if (dedupe !== undefined) {
+                let start = fDate(
+                    new Date(
+                        Date.now() - 1000 * 60 * 60 * 24 * (1 + dedupeDays),
+                    ),
+                );
+                if (dedupeDays < 0) {
+                    start = "0000-00-00";
+                }
+                logInfo(`Filtered out transactions before ${start}.`);
+                dedupe(
+                    transactions.filter(
+                        (transaction) => transaction.date >= start,
+                    ),
+                    true,
+                );
+            }
             if ((argv as any).tags) {
                 logInfo("tags", tagTree(transactions));
             }

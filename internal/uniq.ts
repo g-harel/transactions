@@ -1,5 +1,5 @@
 import {fTransaction} from "./format";
-import {logDebug} from "./log";
+import {logDebug, logInfo} from "./log";
 import {MatchedTransaction} from "./match";
 import {Transaction} from "./transaction";
 
@@ -104,6 +104,7 @@ const weightedAvg = (entries: [number, number][]): number => {
 
 export const dedupe = (
     transactions: MatchedTransaction[],
+    logAsInfo = false,
 ): MatchedTransaction[] => {
     const amountMap: {[amount: number]: MatchedTransaction[]} = {};
 
@@ -148,7 +149,7 @@ export const dedupe = (
                 ]);
 
                 if (totalScore > 0.5) {
-                    logDebug(
+                    (logAsInfo ? logInfo : logDebug)(
                         `Duplicate transactions (${totalScore})`,
                         fTransaction(current),
                         fTransaction(compare),
