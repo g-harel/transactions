@@ -8,6 +8,7 @@
         "@types/sqlite3": "^3.1.7",
         "@types/yargs": "^16.0.0",
         "chalk": "^4.1.0",
+        "csv-parse": "^4.15.3",
         "glob": "^7.1.6",
         "prettier": "^2.2.1",
         "sqlite3": "^5.0.2",

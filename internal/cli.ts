@@ -55,7 +55,7 @@ yargs(hideBin(process.argv))
                 slurp(argv.dir),
             );
             const dedupeDays: number = (argv as any).dedupe;
-            if (dedupe !== undefined) {
+            if (dedupeDays !== undefined) {
                 let start = fDate(
                     new Date(
                         Date.now() - 1000 * 60 * 60 * 24 * (1 + dedupeDays),

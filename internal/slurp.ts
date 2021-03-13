@@ -1,5 +1,6 @@
 import path from "path";
 
+import csvParse from "csv-parse/lib/sync";
 import glob from "glob";
 
 import {Transaction} from "./transaction";
@@ -8,34 +9,21 @@ import {logError, logInfo} from "./log";
 import {genID} from "./id";
 import {fDate} from "./format";
 
-const readLines = (fileName: string): string[] => {
-    return readFile(fileName).split("\n");
-};
-
-const readCSV = (fileName: string): string[][] => {
-    return (
-        readLines(fileName)
-            // TODO: Support CSV files formatted without apostrophes.
-            .map((line) => line.slice(1, -1).split('","'))
-    );
-};
-
 export const slurpMint = (fileName: string): Transaction[] => {
-    const parseMintLine = (line: string[]): Transaction | null => {
-        if (line.length !== 9) return null;
-        const isDebit = line[4].toLowerCase() === "debit";
+    const parseMintLine = (line: any): Transaction | null => {
+        const isDebit = line["Transaction Type"].toLowerCase() === "debit";
         const transaction = {
             id: genID(),
-            date: fDate(new Date(Date.parse(line[0]))),
-            descriptions: [line[1], line[2]],
-            amount: Number(line[3]) * (isDebit ? -1 : 1),
+            date: fDate(new Date(Date.parse(line["Date"]))),
+            descriptions: [line["Description"], line["Original Description"]],
+            amount: Number(line["Amount"]) * (isDebit ? -1 : 1),
             tags: [],
         };
         if (isNaN(transaction.amount)) return null;
         return transaction;
     };
 
-    return readCSV(fileName)
+    return csvParse(readFile(fileName), {columns: true})
         .map(parseMintLine)
         .filter((t) => t !== null);
 };
