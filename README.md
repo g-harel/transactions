@@ -33,10 +33,34 @@ id          TEXT -- Arbitrary random ID.
 date        TEXT -- Date in ISO format (YYYY-MM-DD).
 description TEXT -- Transaction description.
 amount      REAL -- Transaction amount relative to self.
-tags        TEXT -- Transactoin tags (TODO comma separated)
+tags        TEXT -- Transaction tags (comma separated)
 _original   TEXT -- Original unstructured transaction line.
 ```
 
-### Examples
+### Example Queries
 
+#### Basic
 
+```
+SELECT * FROM transactions
+```
+
+#### Filters
+
+```
+WHERE tags LIKE '%income%'
+```
+
+```
+WHERE description LIKE '%market%'
+```
+
+```
+WHERE date >= '2021-01-01' AND date < '2021-02-01'
+```
+
+#### Sum
+
+```
+SELECT SUM(amount)
+```
