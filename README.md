@@ -25,3 +25,18 @@ Options:
                                    [string] [required] [default: "transactions"]
   --matchfile  Specify matchfile.[string] [required] [default: "matchfile.json"]
 ```
+
+### Schema
+
+```
+id          TEXT -- Arbitrary random ID.
+date        TEXT -- Date in ISO format (YYYY-MM-DD).
+description TEXT -- Transaction description.
+amount      REAL -- Transaction amount relative to self.
+tags        TEXT -- Transactoin tags (TODO comma separated)
+_original   TEXT -- Original unstructured transaction line.
+```
+
+### Examples
+
+

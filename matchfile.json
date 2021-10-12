@@ -130,6 +130,26 @@
         "duplicateSensitivity": 0.0
     },
     {
+        "pattern": "pepven",
+        "tags": ["spending", "food"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "nyc bagel",
+        "tags": ["spending", "food"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "grand food mart",
+        "tags": ["spending", "food"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "hudson news",
+        "tags": ["spending", "food"],
+        "duplicateSensitivity": 0.0
+    },
+    {
         "pattern": "chick-fil-a",
         "tags": ["spending", "food"],
         "duplicateSensitivity": 0.0
@@ -265,7 +285,7 @@
         "duplicateSensitivity": 0.0
     },
     {
-        "pattern": "cvs\\/pharmacy",
+        "pattern": "cvs(\\/pharmacy)?",
         "tags": ["spending", "food"],
         "duplicateSensitivity": 0.0
     },
@@ -665,12 +685,57 @@
         "duplicateSensitivity": 0.0
     },
     {
-        "pattern": "vans inc",
+        "pattern": "vans( inc)?",
+        "tags": ["spending", "shopping"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "crossroads",
+        "tags": ["spending", "shopping"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "old navy",
+        "tags": ["spending", "shopping"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "levi's",
+        "tags": ["spending", "shopping"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "guitar center",
+        "tags": ["spending", "shopping"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "bureau en gros",
+        "tags": ["spending", "shopping"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "under armour",
+        "tags": ["spending", "shopping"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "lego",
+        "tags": ["spending", "shopping"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "moment",
         "tags": ["spending", "shopping"],
         "duplicateSensitivity": 1.0
     },
     {
         "pattern": "(mass)?drop(\\.com)?",
+        "tags": ["spending", "shopping", "keyboard"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "thocc supply",
         "tags": ["spending", "shopping", "keyboard"],
         "duplicateSensitivity": 0.0
     },
@@ -748,6 +813,16 @@
         "pattern": "nice ?technol(ogies)?",
         "tags": ["spending", "shopping", "keyboard"],
         "duplicateSensitivity": 1.0
+    },
+    {
+        "pattern": "invoice paid",
+        "tags": ["spending", "shopping", "keyboard"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "^Payment$",
+        "tags": ["spending", "shopping", "keyboard"],
+        "duplicateSensitivity": 0.0
     },
     {
         "pattern": "novelkeys",
@@ -965,12 +1040,57 @@
         "duplicateSensitivity": 0.0
     },
     {
+        "pattern": "endlessblading",
+        "tags": ["spending", "shopping", "skating"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "inline ?wareh(ouse)?",
+        "tags": ["spending", "shopping", "skating"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "bicycle ?habi",
+        "tags": ["spending", "shopping", "skating"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "gunzo's",
+        "tags": ["spending", "shopping", "skating"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "proskaters place",
+        "tags": ["spending", "shopping", "skating"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "adapt brand",
+        "tags": ["spending", "shopping", "skating"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "dick's sporting",
+        "tags": ["spending", "shopping", "skating"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "sg sports",
+        "tags": ["spending", "shopping", "skating"],
+        "duplicateSensitivity": 0.0
+    },
+    {
         "pattern": "pillow slides",
         "tags": ["spending", "gift"],
         "duplicateSensitivity": 0.0
     },
     {
         "pattern": "kudoboard",
+        "tags": ["spending", "gift"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "stickeryou",
         "tags": ["spending", "gift"],
         "duplicateSensitivity": 0.0
     },
@@ -990,7 +1110,7 @@
         "duplicateSensitivity": 1.0
     },
     {
-        "pattern": "disney plus",
+        "pattern": "disney( plus)?",
         "tags": ["spending", "subscription"],
         "duplicateSensitivity": 0.0
     },
@@ -1030,7 +1150,17 @@
         "duplicateSensitivity": 0.0
     },
     {
+        "pattern": "apple",
+        "tags": ["spending", "subscription"],
+        "duplicateSensitivity": 0.0
+    },
+    {
         "pattern": "air canada",
+        "tags": ["spending", "travel"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "laborato[ir]{2}e medical biron",
         "tags": ["spending", "travel"],
         "duplicateSensitivity": 0.0
     },
@@ -1095,6 +1225,11 @@
         "duplicateSensitivity": 0.0
     },
     {
+        "pattern": "google.nest",
+        "tags": ["spending", "utility"],
+        "duplicateSensitivity": 0.0
+    },
+    {
         "pattern": "ach interac w3",
         "tags": ["tax"],
         "duplicateSensitivity": 0.0
@@ -1110,6 +1245,11 @@
         "duplicateSensitivity": 0.0
     },
     {
+        "pattern": "chase credit crd epay onus",
+        "tags": ["transfer"],
+        "duplicateSensitivity": 0.0
+    },
+    {
         "pattern": "vanguard.*edi pa?yme?nts",
         "tags": ["transfer"],
         "duplicateSensitivity": 0.0
@@ -1121,6 +1261,11 @@
     },
     {
         "pattern": "webclient funds transfer",
+        "tags": ["transfer"],
+        "duplicateSensitivity": 0.0
+    },
+    {
+        "pattern": "telephone transfer from sav",
         "tags": ["transfer"],
         "duplicateSensitivity": 0.0
     }
