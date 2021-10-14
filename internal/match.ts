@@ -9,6 +9,7 @@ interface Matcher {
     pattern: RegExp;
     tags: string[];
     duplicateSensitivity?: number; // 0-1
+    strict: boolean;
 }
 
 const printMatcher = (matcher: Matcher): string => {
@@ -22,8 +23,13 @@ export interface MatchedTransaction extends Transaction {
 
 const match = (matcher: Matcher, transaction: Transaction): boolean => {
     for (const description of transaction.descriptions) {
-        if (!!description.match(matcher.pattern)) return true;
+        if (description.match(matcher.pattern)) {
+            if (!matcher.strict) return true;
+        } else {
+            if (matcher.strict) return false;
+        }
     }
+    return matcher.strict;
 };
 
 export const tagTransactions = (
@@ -34,6 +40,8 @@ export const tagTransactions = (
     const matchers: Matcher[] = JSON.parse(readFile(matchFile)).map((m) => {
         m.id = genID();
         m.pattern = new RegExp(m.pattern, "i");
+        m.duplicateSensitivity = m.duplicateSensitivity || 0;
+        m.strict = m.strict || false;
         return m;
     });
 

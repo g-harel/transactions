@@ -500,6 +500,12 @@
         "duplicateSensitivity": 0.0
     },
     {
+        "pattern": "^Google$",
+        "tags": ["spending", "games"],
+        "duplicateSensitivity": 0.0,
+        "strict": true
+    },
+    {
         "pattern": "j?in's electric",
         "tags": ["spending", "housing"],
         "duplicateSensitivity": 0.0
@@ -1047,12 +1053,12 @@
     {
         "pattern": "inline ?wareh(ouse)?",
         "tags": ["spending", "shopping", "skating"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "bicycle ?habi",
         "tags": ["spending", "shopping", "skating"],
-        "duplicateSensitivity": 0.0
+        "duplicateSensitivity": 1.0
     },
     {
         "pattern": "gunzo's",
