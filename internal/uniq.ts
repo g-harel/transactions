@@ -116,10 +116,11 @@ export const dedupe = (
     }
 
     const result: MatchedTransaction[] = [];
+    const compared: Record<string, boolean> = {};
     for (const siblings of Object.values(amountMap)) {
         for (let i = 0; i < siblings.length; i++) {
             const current = siblings[i];
-            if (!current.matcher.duplicateSensitivity) {
+            if (current.matcher.duplicateSensitivity === -1) {
                 result.push(current);
                 continue;
             }
@@ -127,7 +128,11 @@ export const dedupe = (
             let isDuplicate = false;
             for (let j = i + 1; j < siblings.length; j++) {
                 const compare = siblings[j];
-                if (!compare.matcher.duplicateSensitivity) continue;
+                if (compare.matcher.duplicateSensitivity === -1) continue;
+
+                const compareKey = [current.id, compare.id].sort().join("-");
+                const firstCompared = !compared[compareKey]
+                compared[compareKey] = true;
 
                 // Higher scores mean higher chance of being similar.
                 // Score should stay between 0 and 1 inclusive.
@@ -140,6 +145,12 @@ export const dedupe = (
                     [1, rateExp(siblings.length - 1, 2)],
                 ]);
                 if (quickScore < 0.5) {
+                    firstCompared &&
+                        logDebug(
+                            `Possible duplicate transactions (${quickScore})`,
+                            fTransaction(current),
+                            fTransaction(compare),
+                        );
                     continue;
                 }
 
@@ -150,12 +161,19 @@ export const dedupe = (
 
                 if (totalScore > 0.5) {
                     (logAsInfo ? logInfo : logDebug)(
-                        `Duplicate transactions (${totalScore})`,
+                        `Duplicate transactions (${totalScore} - ${quickScore})`,
                         fTransaction(current),
                         fTransaction(compare),
                     );
                     isDuplicate = true;
                     break;
+                } else {
+                    firstCompared &&
+                        logDebug(
+                            `Possible duplicate transactions (${totalScore})`,
+                            fTransaction(current),
+                            fTransaction(compare),
+                        );
                 }
             }
             if (!isDuplicate) result.push(current);

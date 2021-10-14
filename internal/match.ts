@@ -8,7 +8,7 @@ interface Matcher {
     id: string;
     pattern: RegExp;
     tags: string[];
-    duplicateSensitivity?: number; // 0-1
+    duplicateSensitivity?: number; // 0-1 (-1 for never duplicate)
     strict: boolean;
 }
 
