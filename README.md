@@ -17,16 +17,24 @@ Commands:
   inspect      Inspect transactions.
   query [sql]  Query transactions.
 
-Options:
+Global Options:
   --help       Show help                                               [boolean]
   --version    Show version number                                     [boolean]
   --verbose    Run with verbose logging.                               [boolean]
   --dir        Specify transaction source.
                                    [string] [required] [default: "transactions"]
   --matchfile  Specify matchfile.[string] [required] [default: "matchfile.json"]
+
+`inspect` Options:
+  --tags       Print the calculated tag tree.                          [boolean]
+  --dedupe     Dedupe transactions going back N days. Use -1 to dedupe all
+               transactions.                                            [number]
+
+`query` Options:
+  --total      Print total of queried transactions.                    [boolean]
 ```
 
-### Schema
+## Query Schema
 
 ```
 id          TEXT -- Arbitrary random ID.
