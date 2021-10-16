@@ -5,7 +5,7 @@ import {MatchedTransaction} from "./match";
 
 let db: sqlite3.Database;
 
-const logErr = (err: Error) => {
+const logErr = (err: Error | null) => {
     if (err) logError("Database error", String(err));
 };
 
@@ -48,7 +48,7 @@ export const init = async () => {
     logDebug("sqlite3", fQuery(sql));
 
     const createTable = sync();
-    db.run(sql, (_, err: Error) => {
+    db.run(sql, (_: any, err: Error) => {
         logErr(err);
         createTable.done();
     });
@@ -67,7 +67,7 @@ export const write = async (transactions: MatchedTransaction[]) => {
                 `INSERT INTO transactions VALUES (
                     $id, $date, $description, $amount, $tags, $_original
                 )`,
-                (_, err) => {
+                (_: any, err: any) => {
                     logErr(err);
                     prepareStatement.done();
                 },
@@ -83,7 +83,7 @@ export const write = async (transactions: MatchedTransaction[]) => {
                     $tags: transaction.matcher.tags.join(", "),
                     $_original: JSON.stringify(transaction),
                 },
-                (_, err: Error) => {
+                (_: any, err: Error) => {
                     logErr(err);
                     insertTransaction.done();
                 },

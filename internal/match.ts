@@ -8,7 +8,7 @@ interface Matcher {
     id: string;
     pattern: RegExp;
     tags: string[];
-    duplicateSensitivity?: number; // 0-1 (-1 for never duplicate)
+    duplicateSensitivity: number; // 0-1 (-1 for never duplicate)
     strict: boolean;
 }
 
@@ -37,16 +37,16 @@ export const tagTransactions = (
     transactions: Transaction[],
 ): MatchedTransaction[] => {
     const tagged: MatchedTransaction[] = [];
-    const matchers: Matcher[] = JSON.parse(readFile(matchFile)).map((m) => {
+    const matchers: Matcher[] = JSON.parse(readFile(matchFile)).map((m: any) => {
         m.id = genID();
         m.pattern = new RegExp(m.pattern, "i");
         m.duplicateSensitivity = m.duplicateSensitivity || 0;
         m.strict = m.strict || false;
-        return m;
+        return m as Matcher;
     });
 
     for (const transaction of transactions) {
-        let matched: Matcher = null;
+        let matched: Matcher | null = null;
         for (const matcher of matchers) {
             if (match(matcher, transaction)) {
                 if (matched !== null) {

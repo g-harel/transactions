@@ -25,7 +25,7 @@ export const slurpMint = (fileName: string): Transaction[] => {
 
     return csvParse(readFile(fileName), {columns: true})
         .map(parseMintLine)
-        .filter((t) => t !== null);
+        .filter((t: any) => t !== null);
 };
 
 const sources: Record<string, (f: string) => Transaction[]> = {
@@ -35,7 +35,7 @@ const sources: Record<string, (f: string) => Transaction[]> = {
 export const slurp = (dir: string): Transaction[] => {
     const fileNames = glob.sync(path.join(dir, "*-*.*"));
 
-    let transactions = [];
+    let transactions: Transaction[] = [];
     for (const fileName of fileNames) {
         const match = path.basename(fileName).match(/(\w+)-\d+\.\w+/);
         if (match === null || match.length < 1) {
